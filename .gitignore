@@ -1,3 +1,6 @@
+*.swp
+./philo/philo
+
 # Prerequisites
 *.d
 
