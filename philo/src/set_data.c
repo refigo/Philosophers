@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:04:04 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/24 17:12:50 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	set_data(t_setting *data, int argc, char **argv)
 {
 	memset(data, 0, sizeof(t_setting));
 	get_data(data, argc, argv);
-	if (check_data(data, argc) == FALSE)
+	if (check_data(data, argc) == NOVALID)
 		return (NOVALID);
 	return (VALID);
 }
