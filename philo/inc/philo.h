@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 10:32:17 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/24 13:40:58 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-
-struct s_philo
+typedef enum s_bool
 {
-	int	num_name;
+	FALSE,
+	TRUE
+}			t_bool;
 
-}		t_philo;
+typedef struct s_philo
+{
+	int	name;
 
-struct s_setting
+}				t_philo;
+
+typedef struct s_setting
 {
 	int	num_of_philos;
 	int	time_to_die;
@@ -31,6 +36,14 @@ struct s_setting
 	int	time_to_sleep;
 	int	num_of_times_each_must_eat;
 
-}		t_setting;
+}				t_setting;
+
+// utils.c
+size_t	mgo_strlen(const char *s);
+void	mgo_putstr_fd(char *s, int fd);
+int		mgo_atoi(const char *str);
+
+// test_philo.c
+void	test_setting(t_setting *data);
 
 #endif
