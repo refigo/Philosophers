@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:11:12 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/24 17:19:53 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ size_t	mgo_strlen(const char *s);
 void	mgo_putstr_fd(char *s, int fd);
 int		mgo_atoi(const char *str);
 int		error_with_msg(char *msg);
-void	*mgo_calloc(size_t count, size_t size);
+int		mgo_calloc(void **dest, size_t count, size_t size);
 
 // test_philo.c
 void	test_setting(t_setting *data);
