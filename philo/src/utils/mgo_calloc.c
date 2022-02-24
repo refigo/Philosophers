@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mgo_calloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:04:28 by mgo              ###   ########.fr       */
+/*   Created: 2022/02/24 16:50:03 by mgo               #+#    #+#             */
+/*   Updated: 2022/02/24 17:01:58 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <stdlib.h>
 
-int	init_for_dining(t_setting *data)
+void	*mgo_calloc(void **dest, size_t count, size_t size)
 {
-	//malloc_philos_and_forks();
-	//mgo_calloc(1, sizeof(pthread_t));
-	//create_philos();
-	//init_forks();
+	char			*allocated;
+	unsigned int	i;
 
-	test_setting(data);
+	allocated = (char *)malloc(count * size);
+	if (!allocated)
+		return (NULL);
+	i = 0;
+	while (i < (count * size))
+	{
+		allocated[i] = 0;
+		i++;
+	}
+	if (!allocated)
+		return (FALSE);
+	*dest = (void *)allocated;
 	return (TRUE);
 }
 
-int	main(int argc, char **argv)
-{
-	t_setting	data;
-
-	if (set_data(&data, argc, argv) == NOVALID)
-		return (NOVALID);
-	init_for_dining(&data);
-	//have_dining();
-	//clear_data();
-
-	return (VALID);
-}

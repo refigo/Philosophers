@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/02/24 13:45:14 by mgo              ###   ########.fr        #
+#    Updated: 2022/02/24 15:45:51 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,11 @@ DIR_UTIL	=	utils/
 OBJ_PATH	=	./obj/
 
 SRC_LIST	=	main.c \
+				set_data.c \
 				$(DIR_UTIL)mgo_atoi.c \
 				$(DIR_UTIL)mgo_putstr_fd.c \
 				$(DIR_UTIL)mgo_strlen.c \
+				$(DIR_UTIL)error_with_msg.c \
 				test_philo.c
 SRC			=	$(addprefix $(SRC_PATH), $(SRC_LIST))
 

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 14:26:56 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/24 17:03:39 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@
 
 typedef enum s_bool
 {
-	TRUE,
-	FALSE
+	FALSE,
+	TRUE
 }			t_bool;
+
+typedef enum s_valid
+{
+	VALID,
+	NOVALID
+}			t_valid;
 
 typedef struct s_philo
 {
-	int					name;
+	int					order;
 	pthread_t			*thread;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
@@ -47,10 +53,15 @@ typedef struct s_setting
 
 }				t_setting;
 
+// set_data.c
+int		set_data(t_setting *data, int argc, char **argv);
+
 // utils.c
 size_t	mgo_strlen(const char *s);
 void	mgo_putstr_fd(char *s, int fd);
 int		mgo_atoi(const char *str);
+int		error_with_msg(char *msg);
+void	*mgo_calloc(size_t count, size_t size);
 
 // test_philo.c
 void	test_setting(t_setting *data);
