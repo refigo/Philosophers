@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/25 15:08:52 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 15:22:26 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	test_setting(t_setting *data)
 {
 	printf("----- test t_setting *data\n");
 
+	printf("data address: [%p]\n", data);
 	printf("num_of_philos: [%d]\n", data->num_of_philos);
 	printf("time_to_die: [%d]\n", data->time_to_die);
 	printf("time_to_eat: [%d]\n", data->time_to_eat);
