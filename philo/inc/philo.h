@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/25 13:05:47 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 14:48:18 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+//to remove
 typedef enum s_bool
 {
 	FALSE,
@@ -26,17 +27,17 @@ typedef enum s_bool
 
 typedef enum s_valid
 {
-	VALID,
-	NOVALID
+	SUCCESS,
+	FAIL
 }			t_valid;
 
 typedef struct s_philo
 {
-	int					order;
+	int					number;
 	pthread_t			thread;
-	pthread_mutex_t		l_fork;
-	pthread_mutex_t		r_fork;
-	pthread_mutex_t		mutex_check;
+	pthread_mutex_t		*l_fork;
+	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		mutex_for_check;
 	struct timeval		time_eat;
 	struct s_setting	*data;
 }				t_philo;
@@ -66,5 +67,6 @@ void	*mgo_calloc(size_t count, size_t size);
 
 // test_philo.c
 void	test_setting(t_setting *data);
+void	test_philos(t_setting *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:44:39 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:03:53 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 13:51:20 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	error_with_msg(char *msg)
 	if (msg)
 		mgo_putstr_fd(msg, 2);
 	mgo_putstr_fd("\n", 2);
-	return (NOVALID);
+	return (FAIL);
 }
