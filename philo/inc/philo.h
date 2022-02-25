@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:19:53 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 13:05:47 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ typedef enum s_valid
 typedef struct s_philo
 {
 	int					order;
-	pthread_t			*thread;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
-	struct timeval		time_eat_last;
+	pthread_t			thread;
+	pthread_mutex_t		l_fork;
+	pthread_mutex_t		r_fork;
+	pthread_mutex_t		mutex_check;
+	struct timeval		time_eat;
 	struct s_setting	*data;
 }				t_philo;
 
@@ -61,7 +62,7 @@ size_t	mgo_strlen(const char *s);
 void	mgo_putstr_fd(char *s, int fd);
 int		mgo_atoi(const char *str);
 int		error_with_msg(char *msg);
-int		mgo_calloc(void **dest, size_t count, size_t size);
+void	*mgo_calloc(size_t count, size_t size);
 
 // test_philo.c
 void	test_setting(t_setting *data);

@@ -6,19 +6,27 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 17:18:43 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 13:08:29 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+
 int	init_for_dining(t_setting *data)
 {
-	t_philo	*philos;
-	//malloc_philos_and_forks();
-	mgo_calloc((void **)&philos, data->num_of_philos, sizeof(t_philo));
+	int	i;
+
+
 	//create_philos();
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+
+	}
+
 	//init_forks();
+
 
 	test_setting(data);
 	return (TRUE);
