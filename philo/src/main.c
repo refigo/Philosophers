@@ -6,24 +6,20 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/25 13:53:53 by mgo              ###   ########.fr       */
+/*   Updated: 2022/02/25 16:02:23 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-//int	have_dining()
-//create_philos();
-
-void	init_for_dining(t_setting *data)
+void	test_overall(t_setting *data)
 {
-	//init_forks();
-
-
 	test_setting(data);
 	test_philos(data);
 }
+
+//int	have_dining()
+//create_philos();
 
 int	main(int argc, char **argv)
 {
@@ -33,10 +29,11 @@ int	main(int argc, char **argv)
 		return (error_with_msg("the number of args wrong!"));
 	if (set_data(&data, argc, argv) == FAIL)
 		return (FAIL);
-	init_for_dining(&data);
 	//have_dining();
+
 	//clear_data();
 
+	test_overall(&data);
 	return (SUCCESS);
 }
 //error exception with free all???
