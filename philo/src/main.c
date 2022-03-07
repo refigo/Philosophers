@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/25 16:02:23 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/07 16:41:54 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	test_overall(t_setting *data)
 	test_philos(data);
 }
 
-//int	have_dining()
-//create_philos();
+int	have_dining(t_setting *data)
+{
+
+	//create_philos();
+
+}
 
 int	main(int argc, char **argv)
 {
