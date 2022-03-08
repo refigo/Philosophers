@@ -6,11 +6,28 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/25 15:22:26 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/08 12:18:46 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	test_setting(t_setting *data)
+{
+	printf("----- test t_setting *data\n");
+
+	printf("data address: [%p]\n", data);
+	printf("num_of_philos: [%d]\n", data->num_of_philos);
+	printf("time_to_die: [%d]\n", data->time_to_die);
+	printf("time_to_eat: [%d]\n", data->time_to_eat);
+	printf("time_to_sleep: [%d]\n", data->time_to_sleep);
+	printf("num_of_times_each_must_eat: [%d]\n", data->num_of_times_each_must_eat);
+	//philos, forks
+	printf("philos addr: [%p]\n", data->philos);
+	printf("forks addr: [%p]\n", data->forks);
+
+	printf("----- done t_setting *data\n");
+}
 
 void	test_philos(t_setting *data)
 {
@@ -36,19 +53,17 @@ void	test_philos(t_setting *data)
 	printf("----- done t_philo *philos\n");
 }
 
-void	test_setting(t_setting *data)
+void	test_timeval(t_setting *data)
 {
-	printf("----- test t_setting *data\n");
+	printf("---- test timeval\n");
+	printf("time_start_dining: [%ld]\n", data->time_start_dining.tv_sec);
+	printf("time_start_dining: [%d]\n", data->time_start_dining.tv_usec);
+	printf("----- done timeval\n");
+}
 
-	printf("data address: [%p]\n", data);
-	printf("num_of_philos: [%d]\n", data->num_of_philos);
-	printf("time_to_die: [%d]\n", data->time_to_die);
-	printf("time_to_eat: [%d]\n", data->time_to_eat);
-	printf("time_to_sleep: [%d]\n", data->time_to_sleep);
-	printf("num_of_times_each_must_eat: [%d]\n", data->num_of_times_each_must_eat);
-	//philos, forks
-	printf("philos addr: [%p]\n", data->philos);
-	printf("forks addr: [%p]\n", data->forks);
-
-	printf("----- done t_setting *data\n");
+void	test_overall(t_setting *data)
+{
+	test_setting(data);
+	test_philos(data);
+	test_timeval(data);
 }
