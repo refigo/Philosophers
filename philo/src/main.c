@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/08 15:56:23 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/09 15:31:15 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 void	print_philo_status(t_philo *philo, char *status)
 {
 	struct timeval	time_now;
-	long long		timestamp_in_ms;
+	long long		timestamp_ms;
 
 	gettimeofday(&time_now, NULL);
-	timestamp_in_ms = time_now.tv_sec - philo->data->time_start_dining.tv_sec;
-	timestamp_in_ms += time_now.tv_usec / 1000 - philo->data->time_start_dining.tv_usec / 1000;
-	printf("%lld %d %s\n", timestamp_in_ms, philo->number, status);
+	// todo: modify timestamp_ms
+	timestamp_ms = time_now.tv_sec - philo->data->time_start_dining.tv_sec;
+	timestamp_ms += time_now.tv_usec / 1000 - philo->data->time_start_dining.tv_usec / 1000;
+	printf("%lld\t%d %s\n", timestamp_ms, philo->number, status);
 }
 
-void	taking_forks(t_philo *philo)
+#include <unistd.h>
+static void	taking_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	print_philo_status(philo, "has taken a fork");
@@ -32,22 +34,33 @@ void	taking_forks(t_philo *philo)
 	print_philo_status(philo, "has taken a fork");
 }
 
-#include <unistd.h>
+static void	eating(t_philo *philo)
+{
+	print_philo_status(philo, "is eating");
+	usleep(philo->data->time_to_eat * 1000);
+	// todo: check for dead
+}
+
+static void	sleeping(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	print_philo_status(philo, "is sleeping");
+	usleep(philo->data->time_to_sleep * 1000);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = arg;
-	printf("philo[%d]: hi\n", philo->number);
+	//printf("philo[%d]: hi\n", philo->number);
 	if ((philo->number) % 2 == 0)
-		usleep(100 * 1000);
+		usleep(philo->data->time_to_eat * 1000);
 	taking_forks(philo);
-
-	// eat
-	// sleep
-	// think
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
+	eating(philo);
+	sleeping(philo);
+	// thinking
 	return (NULL);
 }
 
