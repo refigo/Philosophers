@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 15:49:20 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/09 15:57:21 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,22 @@ static void	taking_forks(t_philo *philo)
 
 static void	eating(t_philo *philo)
 {
-	print_philo_status(philo, "is eating");
-	usleep(philo->data->time_to_eat * 1000);
-	// todo: check for dead
+	struct timeval	time_eat_now;
+	long long		diff_time_eat_now_last;
+
+	gettimeofday(&time_eat_now, NULL);
+	diff_time_eat_now_last = get_ms_timeval(time_eat_now) - get_ms_timeval(philo->time_eat_last);
+	printf("diff_time_eat_now_last: [%lld]\n", diff_time_eat_now_last);
+	if (diff_time_eat_now_last > philo->data->time_to_die)
+	{
+		print_philo_status(philo, "died");
+		//todo: use mutex_for_check
+	}
+	else
+	{
+		print_philo_status(philo, "is eating");
+		usleep(philo->data->time_to_eat * 1000);
+	}
 }
 
 static void	sleeping(t_philo *philo)
@@ -68,6 +81,7 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = arg;
+	philo->time_eat_last = philo->data->time_start_dining;
 	//printf("philo[%d]: hi\n", philo->number);
 	if ((philo->number) % 2 == 0)
 		usleep(philo->data->time_to_eat * 1000);
