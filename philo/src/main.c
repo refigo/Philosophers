@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 15:41:52 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/09 15:45:12 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ long long	get_ms_timeval(struct timeval tv)
 {
 	long long	ret;
 
-	ret = 0;
-	ret += (tv.tv_sec * 1000);
+	ret = (tv.tv_sec * 1000);
 	ret += (tv.tv_usec / 1000);
 	return (ret);
 }
