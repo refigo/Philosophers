@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 15:45:12 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/09 15:49:20 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ static void	sleeping(t_philo *philo)
 	usleep(philo->data->time_to_sleep * 1000);
 }
 
+static void	thinking(t_philo *philo)
+{
+	print_philo_status(philo, "is thinking");
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
@@ -69,7 +74,7 @@ void	*philo_routine(void *arg)
 	taking_forks(philo);
 	eating(philo);
 	sleeping(philo);
-	// thinking
+	thinking(philo);
 	return (NULL);
 }
 
