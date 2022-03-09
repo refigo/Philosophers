@@ -6,22 +6,32 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 15:31:15 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/09 15:41:52 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 // check status
 
+long long	get_ms_timeval(struct timeval tv)
+{
+	long long	ret;
+
+	ret = 0;
+	ret += (tv.tv_sec * 1000);
+	ret += (tv.tv_usec / 1000);
+	return (ret);
+}
+
 void	print_philo_status(t_philo *philo, char *status)
 {
 	struct timeval	time_now;
+	struct timeval	time_start;
 	long long		timestamp_ms;
 
 	gettimeofday(&time_now, NULL);
-	// todo: modify timestamp_ms
-	timestamp_ms = time_now.tv_sec - philo->data->time_start_dining.tv_sec;
-	timestamp_ms += time_now.tv_usec / 1000 - philo->data->time_start_dining.tv_usec / 1000;
+	time_start = philo->data->time_start_dining;
+	timestamp_ms = get_ms_timeval(time_now) - get_ms_timeval(time_start);
 	printf("%lld\t%d %s\n", timestamp_ms, philo->number, status);
 }
 
