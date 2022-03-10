@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 15:57:21 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/10 15:16:14 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void	eating(t_philo *philo)
 	long long		diff_time_eat_now_last;
 
 	gettimeofday(&time_eat_now, NULL);
-	diff_time_eat_now_last = get_ms_timeval(time_eat_now) - get_ms_timeval(philo->time_eat_last);
+	diff_time_eat_now_last = \
+		get_ms_timeval(time_eat_now) - get_ms_timeval(philo->time_eat_last);
 	printf("diff_time_eat_now_last: [%lld]\n", diff_time_eat_now_last);
 	if (diff_time_eat_now_last > philo->data->time_to_die)
 	{
