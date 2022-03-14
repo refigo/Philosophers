@@ -6,19 +6,18 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/14 12:50:39 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/14 13:27:21 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>
+# include <stdio.h>	// to remove?
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 
-//to remove
 typedef enum s_bool
 {
 	FALSE,
@@ -57,14 +56,19 @@ typedef struct s_setting
 }				t_setting;
 
 // set_data.c
-int		set_data(t_setting *data, int argc, char **argv);
+int			set_data(t_setting *data, int argc, char **argv);
 
-// utils.c
-size_t	mgo_strlen(const char *s);
-void	mgo_putstr_fd(char *s, int fd);
-int		mgo_atoi(const char *str);
-int		error_with_msg(char *msg);
-void	*mgo_calloc(size_t count, size_t size);
+// philo_routine.c
+void		*philo_routine(void *arg);
+
+// utils
+size_t		mgo_strlen(const char *s);
+void		mgo_putstr_fd(char *s, int fd);
+int			mgo_atoi(const char *str);
+int			error_with_msg(char *msg);
+void		*mgo_calloc(size_t count, size_t size);
+long long	get_ms_timeval(struct timeval tv);
+void		print_philo_status(t_philo *philo, char *status);
 
 // test_philo.c
 void	test_overall(t_setting *data);
