@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/09 14:42:01 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/14 12:50:39 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_philo
 	pthread_t			thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	pthread_mutex_t		mutex_for_check;
 	struct timeval		time_eat_last;
+	pthread_mutex_t		mutex_check_starvation;
 	struct s_setting	*data;
 }				t_philo;
 
@@ -52,7 +52,8 @@ typedef struct s_setting
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	struct timeval	time_start_dining;
-	int				check_for_finish;
+	int				flag_finish;
+	pthread_mutex_t	mutex_flag_finish;
 }				t_setting;
 
 // set_data.c
