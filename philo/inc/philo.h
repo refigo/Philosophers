@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/14 14:25:26 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 14:38:33 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_setting
 	struct timeval	time_start_dining;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
+	pthread_mutex_t	mutex_print;
 }				t_setting;
 
 // set_data.c

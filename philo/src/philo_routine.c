@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 13:22:25 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 15:22:07 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 static void	taking_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
-	if (philo->data->flag_finish == FALSE)
-	{
-		pthread_mutex_lock(philo->l_fork);
-		print_philo_status(philo, "has taken a fork");
-		pthread_mutex_lock(philo->r_fork);
-		print_philo_status(philo, "has taken a fork");
-	}
+	pthread_mutex_lock(philo->l_fork);
+	print_philo_status(philo, "has taken a fork");
+	pthread_mutex_lock(philo->r_fork);
+	print_philo_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 }
 
@@ -31,8 +28,7 @@ static void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_check_starvation);
 	gettimeofday(&philo->time_eat_last, NULL);
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
-	if (philo->data->flag_finish == FALSE)
-		print_philo_status(philo, "is eating");
+	print_philo_status(philo, "is eating");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->l_fork);
@@ -43,8 +39,7 @@ static void	eating(t_philo *philo)
 static void	sleeping(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
-	if (philo->data->flag_finish == FALSE)
-		print_philo_status(philo, "is sleeping");
+	print_philo_status(philo, "is sleeping");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 	usleep(philo->data->time_to_sleep * 1000);
 }
@@ -52,8 +47,7 @@ static void	sleeping(t_philo *philo)
 static void	thinking(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
-	if (philo->data->flag_finish == FALSE)
-		print_philo_status(philo, "is thinking");
+	print_philo_status(philo, "is thinking");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 }
 
@@ -64,16 +58,12 @@ void	*philo_routine(void *arg)
 	philo = arg;
 	if ((philo->number) % 2 == 0)
 		usleep(philo->data->time_to_eat * 1000);
-	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	while (philo->data->flag_finish == FALSE)
 	{
-		pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 		taking_forks(philo);
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
-		pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	}
-	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 	return (NULL);
 }

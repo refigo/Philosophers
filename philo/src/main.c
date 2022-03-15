@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 13:55:25 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 14:48:56 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@ void	*monitor_routine(void *arg)
 	philo = arg;
 	while (philo->data->flag_finish == FALSE)
 	{
-		pthread_mutex_lock(&philo->data->mutex_flag_finish);
 		pthread_mutex_lock(&philo->mutex_check_starvation);
+		pthread_mutex_lock(&philo->data->mutex_flag_finish);
 		gettimeofday(&time_now, NULL);
 		diff_time_eat_now_last = \
 			get_ms_timeval(time_now) - get_ms_timeval(philo->time_eat_last);
-		pthread_mutex_lock(&philo->data->mutex_flag_finish);
 		if (diff_time_eat_now_last > philo->data->time_to_die && philo->data->flag_finish == FALSE)
 		{
-			philo->data->flag_finish = TRUE;
 			print_philo_status(philo, "died");
+			philo->data->flag_finish = TRUE;
 		}
-		pthread_mutex_unlock(&philo->mutex_check_starvation);
 		pthread_mutex_unlock(&philo->data->mutex_flag_finish);
+		pthread_mutex_unlock(&philo->mutex_check_starvation);
 	}
 	return (NULL);
 }

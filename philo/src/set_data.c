@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/14 13:26:58 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 14:42:47 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ int	set_data(t_setting *data, int argc, char **argv)
 		return (FAIL);
 	if (set_forks_and_philos(data) == FAIL)
 		return (FAIL);
+
+	pthread_mutex_init(&data->mutex_flag_finish, NULL);
+
 	return (SUCCESS);
 }
