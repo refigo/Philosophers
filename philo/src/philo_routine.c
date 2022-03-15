@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 15:22:07 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 15:39:09 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 static void	taking_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	print_philo_status(philo, "has taken a fork");
+	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 	pthread_mutex_lock(philo->r_fork);
+	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	print_philo_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 }
