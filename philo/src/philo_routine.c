@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 15:39:09 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 16:03:46 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static void	eating(t_philo *philo)
 	gettimeofday(&philo->time_eat_last, NULL);
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	print_philo_status(philo, "is eating");
+	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
+	pthread_mutex_lock(&philo->data->mutex_flag_finish);
+	(philo->num_eat)++;
+	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
+		(philo->data->num_philos_done)++;
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->l_fork);

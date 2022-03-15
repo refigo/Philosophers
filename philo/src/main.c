@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 14:48:56 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/15 16:10:10 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	*monitor_routine(void *arg)
 			print_philo_status(philo, "died");
 			philo->data->flag_finish = TRUE;
 		}
+		if (philo->data->num_philos_done == philo->data->num_of_philos && philo->data->flag_finish == FALSE)
+		{
+			printf("Finishes!\n");
+			philo->data->flag_finish = TRUE;
+		}
 		pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 		pthread_mutex_unlock(&philo->mutex_check_starvation);
 	}
@@ -50,7 +55,6 @@ void	have_dining(t_setting *data)
 		data->philos[i].time_eat_last = data->time_start_dining;
 		pthread_create(&(data->philos[i].thread), NULL, \
 				philo_routine, &(data->philos[i]));
-		//pthread_detach(data->philos[i].thread);
 		pthread_create(&monitor_thread, NULL, \
 				monitor_routine, &(data->philos[i]));
 		pthread_detach(monitor_thread);
