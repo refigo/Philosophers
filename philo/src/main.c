@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 16:10:10 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/17 20:33:11 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ int	main(int argc, char **argv)
 		return (error_with_msg("the number of args wrong!"));
 	if (set_data(&data, argc, argv) == FAIL)
 		return (FAIL);
+	//test_overall(&data);
 	have_dining(&data);
 	clear_data(&data);
-
-	//test_overall(&data);
 	return (SUCCESS);
 }
 //error exception with free all???
