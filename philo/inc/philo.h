@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 10:23:13 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 15:21:09 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_philo
 {
 	int					number;
 	pthread_t			thread;
+	pthread_t			monitor_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
 	struct timeval		time_eat_last;
@@ -57,6 +58,8 @@ typedef struct s_setting
 	pthread_mutex_t	mutex_flag_finish;
 }				t_setting;
 
+int	is_finished(t_setting *data);
+
 // set_data.c
 int			set_data(t_setting *data, int argc, char **argv);
 
@@ -74,6 +77,7 @@ int			error_with_msg(char *msg);
 void		*mgo_calloc(size_t count, size_t size);
 long long	get_ms_timeval(struct timeval tv);
 void		print_philo_status(t_philo *philo, char *status);
+void	print_philo_died(t_philo *philo, struct timeval time_now);
 
 // test_philo.c
 void	test_overall(t_setting *data);

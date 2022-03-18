@@ -6,15 +6,28 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 10:23:32 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 14:39:13 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	is_finished(t_setting *data)
+{
+	int	ret;
+
+	pthread_mutex_lock(&data->mutex_flag_finish);
+	if (data->flag_finish == TRUE)
+		ret = TRUE;
+	else
+		ret = FALSE;
+	pthread_mutex_unlock(&data->mutex_flag_finish);
+	return (ret);
+}
+
 static void	have_dining(t_setting *data)
 {
-	pthread_t	monitor_thread;
+	//pthread_t	monitor_thread;
 	int	i;
 
 	gettimeofday(&(data->time_start_dining), NULL);
@@ -24,14 +37,23 @@ static void	have_dining(t_setting *data)
 		data->philos[i].time_eat_last = data->time_start_dining;
 		pthread_create(&(data->philos[i].thread), NULL, \
 				philo_routine, &(data->philos[i]));
-		pthread_create(&monitor_thread, NULL, \
+		pthread_create(&(data->philos[i].monitor_thread), NULL, \
 				monitor_routine, &(data->philos[i]));
-		pthread_detach(monitor_thread);
 	}
-	i = -1;
-	while (++i < data->num_of_philos)
+	while (TRUE)
 	{
-		pthread_join(data->philos[i].thread, NULL);
+		pthread_mutex_lock(&data->mutex_flag_finish);
+		i = -1;
+		while (data->flag_finish == TRUE && ++i < data->num_of_philos)
+		{
+			//pthread_join(data->philos[i].thread, NULL);
+			//pthread_join(data->philos[i].monitor_thread, NULL);
+			pthread_detach(data->philos[i].thread);
+			pthread_detach(data->philos[i].monitor_thread);
+		}
+		if (data->flag_finish == TRUE)
+			break ;
+		pthread_mutex_unlock(&data->mutex_flag_finish);
 	}
 }
 
@@ -43,6 +65,7 @@ static void	clear_data(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
+		// todo: destroy elses
 	}
 	free(data->philos);
 	free(data->forks);
