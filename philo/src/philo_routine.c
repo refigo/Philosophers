@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 13:09:54 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 15:26:55 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,22 @@ static void	taking_forks(t_philo *philo)
 	t_setting	*data;
 
 	data = philo->data;
-	if (!is_finished(philo->data))
-		pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(philo->l_fork);
 	print_philo_status(philo, "has taken a fork");
 	// exception for one philosopher
 	while (data->num_of_philos == 1 && data->flag_finish == FALSE)
 		;
 	if (data->num_of_philos == 1 && data->flag_finish == TRUE)
 		return ;
-	if (!is_finished(philo->data))
-		pthread_mutex_lock(philo->r_fork);
+	pthread_mutex_lock(philo->r_fork);
 	print_philo_status(philo, "has taken a fork");
 }
 
 static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_check_starvation);
-	gettimeofday(&philo->time_eat_last, NULL);
 	print_philo_status(philo, "is eating");
+	gettimeofday(&philo->time_eat_last, NULL);
 	(philo->num_eat)++;
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
 		(philo->data->num_philos_done)++;

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 14:39:13 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 15:39:01 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ static void	clear_data(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
-		// todo: destroy elses
+		pthread_mutex_destroy(&data->philos[i].mutex_check_starvation);
 	}
+	pthread_mutex_destroy(&data->mutex_flag_finish);
 	free(data->philos);
 	free(data->forks);
 }
