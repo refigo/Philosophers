@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/03/14 13:25:43 by mgo              ###   ########.fr        #
+#    Updated: 2022/03/18 10:22:38 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ OBJ_PATH	=	./obj/
 SRC_LIST	=	main.c \
 				set_data.c \
 				philo_routine.c \
+				monitor_routine.c \
 				$(DIR_UTIL)mgo_atoi.c \
 				$(DIR_UTIL)mgo_putstr_fd.c \
 				$(DIR_UTIL)mgo_strlen.c \

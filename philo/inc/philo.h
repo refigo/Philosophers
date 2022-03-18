@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 16:08:00 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 10:23:13 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ int			set_data(t_setting *data, int argc, char **argv);
 // philo_routine.c
 void		*philo_routine(void *arg);
 
+// monitor_routine.c
+void		*monitor_routine(void *arg);
+
 // utils
 size_t		mgo_strlen(const char *s);
 void		mgo_putstr_fd(char *s, int fd);
@@ -76,5 +79,6 @@ void		print_philo_status(t_philo *philo, char *status);
 void	test_overall(t_setting *data);
 void	test_setting(t_setting *data);
 void	test_philos(t_setting *data);
+// to remove
 
 #endif

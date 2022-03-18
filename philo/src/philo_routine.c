@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/15 16:03:46 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/18 11:38:30 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,18 @@
 
 static void	taking_forks(t_philo *philo)
 {
+	t_setting	*data;
+
+	data = philo->data;
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	print_philo_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);
+	// exception for one philosopher
+	while (data->num_of_philos == 1 && data->flag_finish == FALSE)
+		;
+	if (data->flag_finish == TRUE)
+		return ;
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	print_philo_status(philo, "has taken a fork");
@@ -68,6 +76,8 @@ void	*philo_routine(void *arg)
 	while (philo->data->flag_finish == FALSE)
 	{
 		taking_forks(philo);
+		if (philo->data->flag_finish == TRUE)
+			break ;
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
