@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 13:20:49 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 13:47:14 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef enum s_bool
+enum e_bool
 {
 	FALSE,
 	TRUE
-}			t_bool;
+};
 
-typedef enum s_valid
+enum e_valid
 {
 	SUCCESS,
 	FAIL
-}			t_valid;
+};
 
 typedef struct s_philo
 {
