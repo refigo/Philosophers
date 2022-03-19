@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/08 12:18:46 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 12:38:18 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	test_philos(t_setting *data)
 void	test_timeval(t_setting *data)
 {
 	printf("---- test timeval\n");
-	printf("time_start_dining: [%ld]\n", data->time_start_dining.tv_sec);
-	printf("time_start_dining: [%d]\n", data->time_start_dining.tv_usec);
+	printf("time_start_dining.tv_sec: [%ld]\n", data->time_start_dining.tv_sec);
+	printf("time_start_dining.tv_usec: [%d]\n", data->time_start_dining.tv_usec);
+	printf("ms_start_dining: [%lld]\n", get_ms_timeval(data->time_start_dining));
 	printf("----- done timeval\n");
 }
 

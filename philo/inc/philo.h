@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 10:36:24 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 13:20:49 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_philo
 	pthread_t			monitor_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	struct timeval		time_eat_last;
+	struct timeval		time_eat_last; // to remove
+	long long			ms_eat_last;
 	pthread_mutex_t		mutex_check_starvation;
 	int					num_eat;
 	struct s_setting	*data;
@@ -52,7 +53,8 @@ typedef struct s_setting
 	int				num_of_times_each_must_eat;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	struct timeval	time_start_dining;
+	struct timeval	time_start_dining; // to remove
+	long long		ms_start_dining;
 	int				num_philos_done;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
@@ -76,8 +78,9 @@ int			mgo_atoi(const char *str);
 int			error_with_msg(char *msg);
 void		*mgo_calloc(size_t count, size_t size);
 long long	get_ms_timeval(struct timeval tv);
+long long	get_time_ms(void);
 void		print_philo_status(t_philo *philo, char *status);
-void	print_philo_died(t_philo *philo, struct timeval time_now);
+void	print_philo_died(t_philo *philo, long long ms_now);
 
 // test_philo.c
 void	test_overall(t_setting *data);
