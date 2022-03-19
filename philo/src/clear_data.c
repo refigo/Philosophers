@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:12:31 by mgo              ###   ########.fr       */
+/*   Created: 2022/03/19 14:12:10 by mgo               #+#    #+#             */
+/*   Updated: 2022/03/19 14:12:26 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	clear_data(t_setting *data)
 {
-	t_setting	data;
+	int	i;
 
-	if ((argc != 5) && (argc != 6))
-		return (error_with_msg("the number of args wrong!"));
-	if (set_data(&data, argc, argv) == FAIL)
-		return (FAIL);
-	have_dining(&data);
-	//test_overall(&data);
-	clear_data(&data);
-	//system("leaks philo");
-	return (SUCCESS);
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philos[i].mutex_check_starvation);
+	}
+	pthread_mutex_destroy(&data->mutex_flag_finish);
+	free(data->philos);
+	free(data->forks);
 }
-//error exception with free all???

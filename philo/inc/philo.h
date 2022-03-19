@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 13:47:14 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 14:17:56 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,20 @@ typedef struct s_setting
 	pthread_mutex_t	mutex_flag_finish;
 }				t_setting;
 
-int	is_finished(t_setting *data);
-
 // set_data.c
 int			set_data(t_setting *data, int argc, char **argv);
+
+// have_dining.c
+int			have_dining(t_setting *data);
 
 // philo_routine.c
 void		*philo_routine(void *arg);
 
 // monitor_routine.c
 void		*monitor_routine(void *arg);
+
+// clear_data.c
+void	clear_data(t_setting *data);
 
 // utils
 size_t		mgo_strlen(const char *s);
@@ -80,7 +84,7 @@ void		*mgo_calloc(size_t count, size_t size);
 long long	get_ms_timeval(struct timeval tv);
 long long	get_time_ms(void);
 void		print_philo_status(t_philo *philo, char *status);
-void	print_philo_died(t_philo *philo, long long ms_now);
+void		print_philo_died(t_philo *philo, long long ms_now);
 
 // test_philo.c
 void	test_overall(t_setting *data);
