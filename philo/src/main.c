@@ -6,24 +6,11 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 13:45:42 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 14:09:57 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	is_finished(t_setting *data)
-{
-	int	ret;
-
-	pthread_mutex_lock(&data->mutex_flag_finish);
-	if (data->flag_finish == TRUE)
-		ret = TRUE;
-	else
-		ret = FALSE;
-	pthread_mutex_unlock(&data->mutex_flag_finish);
-	return (ret);
-}
 
 static void	have_dining(t_setting *data)
 {
