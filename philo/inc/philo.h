@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:17:56 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 14:23:52 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdio.h>	// to remove?
 # include <stdlib.h>
 # include <pthread.h>
-# include <sys/time.h>
 
 enum e_bool
 {
@@ -37,7 +36,6 @@ typedef struct s_philo
 	pthread_t			monitor_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	struct timeval		time_eat_last; // to remove
 	long long			ms_eat_last;
 	pthread_mutex_t		mutex_check_starvation;
 	int					num_eat;
@@ -53,7 +51,6 @@ typedef struct s_setting
 	int				num_of_times_each_must_eat;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	struct timeval	time_start_dining; // to remove
 	long long		ms_start_dining;
 	int				num_philos_done;
 	int				flag_finish;

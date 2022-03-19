@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 12:38:18 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 14:25:50 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	test_philos(t_setting *data)
 	printf("----- done t_philo *philos\n");
 }
 
+/*
+#include <sys/time.h>
 void	test_timeval(t_setting *data)
 {
 	printf("---- test timeval\n");
@@ -61,10 +63,11 @@ void	test_timeval(t_setting *data)
 	printf("ms_start_dining: [%lld]\n", get_ms_timeval(data->time_start_dining));
 	printf("----- done timeval\n");
 }
+*/
 
 void	test_overall(t_setting *data)
 {
 	test_setting(data);
 	test_philos(data);
-	test_timeval(data);
+	//test_timeval(data);
 }
