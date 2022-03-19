@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:25:50 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 15:01:46 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,25 @@ void	test_philos(t_setting *data)
 	printf("----- done t_philo *philos\n");
 }
 
-/*
 #include <sys/time.h>
 void	test_timeval(t_setting *data)
 {
+	struct timeval	tv;
+
+	(void)data;
+	gettimeofday(&tv, NULL);
 	printf("---- test timeval\n");
-	printf("time_start_dining.tv_sec: [%ld]\n", data->time_start_dining.tv_sec);
-	printf("time_start_dining.tv_usec: [%d]\n", data->time_start_dining.tv_usec);
-	printf("ms_start_dining: [%lld]\n", get_ms_timeval(data->time_start_dining));
+	printf("tv.tv_sec: [%ld]\n", tv.tv_sec);
+	printf("tv.tv_usec: [%d]\n", tv.tv_usec);
+	printf("ms_tv(long long): [%lld]\n", get_ms_timeval(tv));
+	printf("ms_tv(long int): [%ld]\n", (long int)get_ms_timeval(tv));
+	printf("ms_tv(long int): [%d]\n", (int)get_ms_timeval(tv));
 	printf("----- done timeval\n");
 }
-*/
 
 void	test_overall(t_setting *data)
 {
 	test_setting(data);
 	test_philos(data);
-	//test_timeval(data);
+	test_timeval(data);
 }

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:23:52 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 15:02:17 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 	pthread_t			monitor_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	long long			ms_eat_last;
+	long int			ms_eat_last;
 	pthread_mutex_t		mutex_check_starvation;
 	int					num_eat;
 	struct s_setting	*data;
@@ -51,7 +51,7 @@ typedef struct s_setting
 	int				num_of_times_each_must_eat;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	long long		ms_start_dining;
+	long int		ms_start_dining;
 	int				num_philos_done;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
