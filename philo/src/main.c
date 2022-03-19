@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:41:00 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 15:39:01 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 10:37:11 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	have_dining(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		data->philos[i].time_eat_last = data->time_start_dining;
-		pthread_create(&(data->philos[i].thread), NULL, \
+		pthread_create(&(data->philos[i].philo_thread), NULL, \
 				philo_routine, &(data->philos[i]));
 		pthread_create(&(data->philos[i].monitor_thread), NULL, \
 				monitor_routine, &(data->philos[i]));
@@ -46,9 +46,9 @@ static void	have_dining(t_setting *data)
 		i = -1;
 		while (data->flag_finish == TRUE && ++i < data->num_of_philos)
 		{
-			//pthread_join(data->philos[i].thread, NULL);
+			//pthread_join(data->philos[i].philo_thread, NULL);
 			//pthread_join(data->philos[i].monitor_thread, NULL);
-			pthread_detach(data->philos[i].thread);
+			pthread_detach(data->philos[i].philo_thread);
 			pthread_detach(data->philos[i].monitor_thread);
 		}
 		if (data->flag_finish == TRUE)

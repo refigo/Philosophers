@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/18 15:21:09 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/19 10:36:24 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum s_valid
 typedef struct s_philo
 {
 	int					number;
-	pthread_t			thread;
+	pthread_t			philo_thread;
 	pthread_t			monitor_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
