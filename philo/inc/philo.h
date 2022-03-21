@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 15:02:17 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/21 14:39:57 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		*philo_routine(void *arg);
 void		*monitor_routine(void *arg);
 
 // clear_data.c
-void	clear_data(t_setting *data);
+void		clear_data(t_setting *data);
 
 // utils
 size_t		mgo_strlen(const char *s);

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:24:29 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:28:05 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	taking_forks(t_philo *philo)
 	data = philo->data;
 	pthread_mutex_lock(philo->l_fork);
 	print_philo_status(philo, "has taken a fork");
-	// exception for one philosopher
 	while (data->num_of_philos == 1 && data->flag_finish == FALSE)
 		;
 	if (data->num_of_philos == 1 && data->flag_finish == TRUE)
@@ -33,7 +32,6 @@ static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_check_starvation);
 	print_philo_status(philo, "is eating");
-	//gettimeofday(&philo->time_eat_last, NULL);
 	philo->ms_eat_last = get_time_ms();
 	(philo->num_eat)++;
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
@@ -62,15 +60,16 @@ void	*philo_routine(void *arg)
 
 	philo = arg;
 	if ((philo->number) % 2 == 0)
-		usleep(philo->data->time_to_eat * 1000);
+		usleep(philo->data->time_to_eat * 500);
 	while (philo->data->flag_finish == FALSE)
 	{
 		taking_forks(philo);
-		if (philo->data->flag_finish == TRUE)
+		if (philo->data->num_of_philos == 1 && philo->data->flag_finish == TRUE)
 			break ;
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
 	}
+	printf("<philos[%d]>In philo_thread: flag_finish is TRUE!!!\n", philo->number);
 	return (NULL);
 }
