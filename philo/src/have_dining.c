@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 16:38:24 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:55:00 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static int	close_when_finished(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		pthread_join(data->philos[i].philo_thread, NULL);
-		pthread_join(data->philos[i].monitor_thread, NULL);
+		pthread_join(data->philos[i].monitor_death_thread, NULL);
 	}
+	pthread_join(data->monitor_having_eaten_up_thread, NULL);
 	return (SUCCESS);
 }
 
@@ -35,9 +36,11 @@ static int	invite_philos(t_setting *data)
 		data->philos[i].ms_eat_last = data->ms_start_dining;
 		pthread_create(&(data->philos[i].philo_thread), NULL, \
 				philo_routine, &(data->philos[i]));
-		pthread_create(&(data->philos[i].monitor_thread), NULL, \
-				monitor_routine, &(data->philos[i]));
+		pthread_create(&(data->philos[i].monitor_death_thread), NULL, \
+				monitor_death_routine, &(data->philos[i]));
 	}
+	pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
+			monitor_having_eaten_up_routine, &data);
 	return (SUCCESS);
 }
 
