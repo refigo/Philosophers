@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 16:28:05 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:34:58 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ void	*philo_routine(void *arg)
 		sleeping(philo);
 		thinking(philo);
 	}
-	printf("<philos[%d]>In philo_thread: flag_finish is TRUE!!!\n", philo->number);
 	return (NULL);
 }

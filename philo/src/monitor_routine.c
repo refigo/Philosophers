@@ -6,11 +6,16 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 16:17:12 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:38:56 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*monitor_routine(void *arg)
+{
+
+}
 
 static void	check_condition_to_finish(t_philo *philo)
 {
@@ -45,8 +50,5 @@ void	*monitor_routine(void *arg)
 		pthread_mutex_unlock(&philo->data->mutex_flag_finish);
 		pthread_mutex_unlock(&philo->mutex_check_starvation);
 	}
-
-	printf("<philos[%d]>In monitor_thread: flag_finish is TRUE!!!\n", philo->number);
-
 	return (NULL);
 }
