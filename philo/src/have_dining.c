@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 16:55:00 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/22 11:01:21 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	invite_philos(t_setting *data)
 				monitor_death_routine, &(data->philos[i]));
 	}
 	pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
-			monitor_having_eaten_up_routine, &data);
+			monitor_having_eaten_up_routine, data);
 	return (SUCCESS);
 }
 
