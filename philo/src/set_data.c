@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 14:43:09 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/23 14:49:21 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ static int	set_forks_and_philos(t_setting *data)
 	return (SUCCESS);
 }
 
+static int	init_mutex_for_termination(t_setting *data)
+{
+	if (pthread_mutex_init(&data->mutex_flag_finish, NULL) != SUCCESS)
+		return (error_with_msg("mutex init failed"));
+	return (SUCCESS);
+}
+
 int	set_data(t_setting *data, int argc, char **argv)
 {
 	memset(data, 0, sizeof(t_setting));
@@ -65,6 +72,7 @@ int	set_data(t_setting *data, int argc, char **argv)
 		return (FAIL);
 	if (set_forks_and_philos(data) == FAIL)
 		return (FAIL);
-	pthread_mutex_init(&data->mutex_flag_finish, NULL);
+	if (init_mutex_for_termination(data) == FAIL)
+		return (FAIL);
 	return (SUCCESS);
 }
