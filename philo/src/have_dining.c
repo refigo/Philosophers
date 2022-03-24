@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/22 11:01:21 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:08:20 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static int	invite_philos(t_setting *data)
 
 int	have_dining(t_setting *data)
 {
-	data->ms_start_dining = get_time_ms();
+	//data->ms_start_dining = get_time_ms();
+	if (set_time_ms(&(data->ms_start_dining)) == FAIL)
+		return (error_with_msg("gettimeofday failed!"));
 	invite_philos(data);
 	close_when_finished(data);
 	return (SUCCESS);

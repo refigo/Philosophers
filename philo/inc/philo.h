@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/21 16:51:00 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:03:41 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,13 @@ void		mgo_putstr_fd(char *s, int fd);
 int			mgo_atoi(const char *str);
 int			error_with_msg(char *msg);
 void		*mgo_calloc(size_t count, size_t size);
-long long	get_ms_timeval(struct timeval tv);
-long long	get_time_ms(void);
+
+//long long	get_ms_timeval(struct timeval tv);
+//long int	get_time_ms(void);
+long int	set_time_ms(long int *dest);
+
 void		print_philo_status(t_philo *philo, char *status);
-void		print_philo_died(t_philo *philo, long long ms_now);
+void		print_philo_died(t_philo *philo, long int ms_now);
 
 // test_philo.c
 void	test_overall(t_setting *data);

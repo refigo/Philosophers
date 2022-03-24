@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/22 11:02:15 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:08:28 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ void	*monitor_having_eaten_up_routine(void *arg)
 static void	check_death_to_finish(t_philo *philo)
 {
 	long int	ms_now;
-	long int	diff_time_eat_now_last;
+	long int	diff_time_eating;
 
-	ms_now = get_time_ms();
-	diff_time_eat_now_last = ms_now - philo->ms_eat_last;
-	if (diff_time_eat_now_last >= philo->data->time_to_die)
+	//ms_now = get_time_ms();
+	set_time_ms(&ms_now);
+
+	diff_time_eating = ms_now - philo->ms_eat_last;
+	if (diff_time_eating >= philo->data->time_to_die)
 	{
 		print_philo_died(philo, ms_now);
 		philo->data->flag_finish = TRUE;

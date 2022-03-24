@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 15:01:46 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:07:40 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ void	test_timeval(t_setting *data)
 	printf("---- test timeval\n");
 	printf("tv.tv_sec: [%ld]\n", tv.tv_sec);
 	printf("tv.tv_usec: [%d]\n", tv.tv_usec);
+	/*
 	printf("ms_tv(long long): [%lld]\n", get_ms_timeval(tv));
 	printf("ms_tv(long int): [%ld]\n", (long int)get_ms_timeval(tv));
 	printf("ms_tv(long int): [%d]\n", (int)get_ms_timeval(tv));
+	*/
 	printf("----- done timeval\n");
 }
 
