@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 11:53:08 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:47:32 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	set_forks_and_philos(t_setting *data)
 	i = -1;
 	while (++i < data->num_of_philos)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL) == FAIL)
+		if (pthread_mutex_init(&(data->forks[i]), NULL) == FAIL)
 			return (error_with_msg("mutex init failed"));
 		data->philos[i].number = i + 1;
-		data->philos[i].l_fork = &data->forks[i];
-		data->philos[i].r_fork = &data->forks[(i + 1) % (data->num_of_philos)];
-		if (pthread_mutex_init(&data->philos[i].mutex_check_starvation, NULL) \
+		data->philos[i].l_fork = &(data->forks[i]);
+		data->philos[i].r_fork = &(data->forks[(i + 1) % (data->num_of_philos)]);
+		if (pthread_mutex_init(&(data->philos[i].mutex_check_starvation), NULL) \
 				== FAIL)
 			return (error_with_msg("mutex init failed"));
 		data->philos[i].data = data;
@@ -60,7 +60,9 @@ static int	set_forks_and_philos(t_setting *data)
 
 static int	init_mutex_for_termination(t_setting *data)
 {
-	if (pthread_mutex_init(&data->mutex_flag_finish, NULL) != SUCCESS)
+	if (pthread_mutex_init(&(data->mutex_flag_finish), NULL) == FAIL)
+		return (error_with_msg("mutex init failed"));
+	if (pthread_mutex_init(&(data->mutex_error_management), NULL) == FAIL)
 		return (error_with_msg("mutex init failed"));
 	return (SUCCESS);
 }

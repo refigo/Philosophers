@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:22:09 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:02:18 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 13:28:48 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	print_philo_died(t_philo *philo, long int ms_now)
 	printf("%ld\t%d died\n", timestamp_ms, philo->number);
 }
 
-// to use e_status?
 void	print_philo_status(t_philo *philo, char *status)
 {
 	long int	timestamp_ms;
@@ -30,7 +29,6 @@ void	print_philo_status(t_philo *philo, char *status)
 	{
 		set_time_ms(&timestamp_ms);
 		timestamp_ms -= philo->data->ms_start_dining;
-		//timestamp_ms = get_time_ms() - philo->data->ms_start_dining;
 		printf("%ld\t%d %s\n", timestamp_ms, philo->number, status);
 	}
 	pthread_mutex_unlock(&philo->data->mutex_flag_finish);

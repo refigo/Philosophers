@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:08:20 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 13:09:09 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	invite_philos(t_setting *data)
 {
 	int	i;
 
+	pthread_mutex_lock(&(data->mutex_error_management));
 	i = -1;
 	while (++i < data->num_of_philos)
 	{
@@ -41,6 +42,9 @@ static int	invite_philos(t_setting *data)
 	}
 	pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
 			monitor_having_eaten_up_routine, data);
+	pthread_create(&(data->error_management_thread), NULL, \
+			error_management_routine, data);
+	pthread_detach(data->error_management_thread);
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/03/19 14:13:19 by mgo              ###   ########.fr        #
+#    Updated: 2022/03/24 12:50:59 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_LIST	=	main.c \
 				have_dining.c \
 				philo_routine.c \
 				monitor_routine.c \
+				error_management_routine.c \
 				clear_data.c \
 				$(DIR_UTIL)mgo_atoi.c \
 				$(DIR_UTIL)mgo_putstr_fd.c \

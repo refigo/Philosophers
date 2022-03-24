@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:03:41 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 12:50:41 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ typedef struct s_setting
 	pthread_t		monitor_having_eaten_up_thread;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
+
+	pthread_t		error_management_thread;
+	pthread_mutex_t	mutex_error_management;
 }				t_setting;
+
+void	*error_management_routine(void *arg);
 
 // set_data.c
 int			set_data(t_setting *data, int argc, char **argv);

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:08:28 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 13:31:07 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	*monitor_having_eaten_up_routine(void *arg)
 	data = arg;
 	while (data->flag_finish == FALSE)
 	{
-		pthread_mutex_lock(&data->mutex_flag_finish);
+		pthread_mutex_lock(&(data->mutex_flag_finish));
 		if (data->flag_finish == FALSE)
 			check_having_eaten_up_to_finish(data);
-		pthread_mutex_unlock(&data->mutex_flag_finish);
+		pthread_mutex_unlock(&(data->mutex_flag_finish));
 	}
 	return (NULL);
 }
@@ -41,9 +41,7 @@ static void	check_death_to_finish(t_philo *philo)
 	long int	ms_now;
 	long int	diff_time_eating;
 
-	//ms_now = get_time_ms();
 	set_time_ms(&ms_now);
-
 	diff_time_eating = ms_now - philo->ms_eat_last;
 	if (diff_time_eating >= philo->data->time_to_die)
 	{
@@ -59,12 +57,12 @@ void	*monitor_death_routine(void *arg)
 	philo = arg;
 	while (philo->data->flag_finish == FALSE)
 	{
-		pthread_mutex_lock(&philo->mutex_check_starvation);
-		pthread_mutex_lock(&philo->data->mutex_flag_finish);
+		pthread_mutex_lock(&(philo->mutex_check_starvation));
+		pthread_mutex_lock(&(philo->data->mutex_flag_finish));
 		if (philo->data->flag_finish == FALSE)
 			check_death_to_finish(philo);
-		pthread_mutex_unlock(&philo->data->mutex_flag_finish);
-		pthread_mutex_unlock(&philo->mutex_check_starvation);
+		pthread_mutex_unlock(&(philo->data->mutex_flag_finish));
+		pthread_mutex_unlock(&(philo->mutex_check_starvation));
 	}
 	return (NULL);
 }

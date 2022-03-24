@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:08:39 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 13:31:39 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_check_starvation);
 	print_philo_status(philo, "is eating");
-
-	//philo->ms_eat_last = get_time_ms();
 	set_time_ms(&(philo->ms_eat_last));
-
 	(philo->num_eat)++;
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
 		(philo->data->num_philos_done)++;
