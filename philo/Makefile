@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/03/24 12:50:59 by mgo              ###   ########.fr        #
+#    Updated: 2022/03/24 14:28:46 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRC_LIST	=	main.c \
 				$(DIR_UTIL)mgo_strlen.c \
 				$(DIR_UTIL)mgo_calloc.c \
 				$(DIR_UTIL)error_with_msg.c \
-				$(DIR_UTIL)get_ms_timeval.c \
+				$(DIR_UTIL)set_time_ms.c \
 				$(DIR_UTIL)print_philo_status.c \
 				test_philo.c
 SRC			=	$(addprefix $(SRC_PATH), $(SRC_LIST))
