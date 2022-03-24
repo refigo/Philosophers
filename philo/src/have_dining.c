@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 13:09:09 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/24 14:39:45 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,19 @@ static int	invite_philos(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		data->philos[i].ms_eat_last = data->ms_start_dining;
-		pthread_create(&(data->philos[i].philo_thread), NULL, \
-				philo_routine, &(data->philos[i]));
-		pthread_create(&(data->philos[i].monitor_death_thread), NULL, \
-				monitor_death_routine, &(data->philos[i]));
+		if (pthread_create(&(data->philos[i].philo_thread), NULL, \
+				philo_routine, &(data->philos[i])) != SUCCESS)
+			return (error_with_msg("pthread_create failed"));
+		if (pthread_create(&(data->philos[i].monitor_death_thread), NULL, \
+				monitor_death_routine, &(data->philos[i])) != SUCCESS)
+			return (error_with_msg("pthread_create failed"));
 	}
-	pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
-			monitor_having_eaten_up_routine, data);
-	pthread_create(&(data->error_management_thread), NULL, \
-			error_management_routine, data);
+	if (pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
+			monitor_having_eaten_up_routine, data) != SUCCESS)
+		return (error_with_msg("pthread_create failed"));
+	if (pthread_create(&(data->error_management_thread), NULL, \
+			error_management_routine, data) != SUCCESS)
+		return (error_with_msg("pthread_create failed"));
 	pthread_detach(data->error_management_thread);
 	return (SUCCESS);
 }
@@ -51,9 +55,8 @@ static int	invite_philos(t_setting *data)
 int	have_dining(t_setting *data)
 {
 	//data->ms_start_dining = get_time_ms();
-	if (set_time_ms(&(data->ms_start_dining)) == FAIL)
-		return (error_with_msg("gettimeofday failed!"));
-	invite_philos(data);
+	set_time_ms(&(data->ms_start_dining));
+	if (invite_philos(data);
 	close_when_finished(data);
 	return (SUCCESS);
 }
