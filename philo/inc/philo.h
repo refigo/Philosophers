@@ -6,14 +6,14 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:50:41 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 15:46:02 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>	// to remove?
+//# include <stdio.h>	// to remove?
 # include <stdlib.h>
 # include <pthread.h>
 

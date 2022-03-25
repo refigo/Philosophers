@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:22:09 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 13:28:48 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 15:50:36 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 void	print_philo_died(t_philo *philo, long int ms_now)
 {

@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 13:31:07 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 15:46:26 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 static void	check_having_eaten_up_to_finish(t_setting *data)
 {

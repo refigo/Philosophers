@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:07:40 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 15:50:53 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 void	test_setting(t_setting *data)
 {
