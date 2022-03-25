@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 14:31:39 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 13:40:00 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ static void	eating(t_philo *philo)
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
 		(philo->data->num_philos_done)++;
 
-	usleep(philo->data->time_to_eat * 1000);
+	//usleep(philo->data->time_to_eat * 1000);
 	/*
 	if (usleep(philo->data->time_to_eat * 1000) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 	*/
+	if (usleep(philo->data->time_to_eat * 1000) == -1)
+		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -52,22 +54,26 @@ static void	sleeping(t_philo *philo)
 {
 	print_philo_status(philo, "is sleeping");
 
-	usleep(philo->data->time_to_sleep * 1000);
+	//usleep(philo->data->time_to_sleep * 1000);
 	/*
 	if (usleep(philo->data->time_to_sleep * 1000) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 	*/
+	if (usleep(philo->data->time_to_sleep * 1000) == -1)
+		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 }
 
 static void	thinking(t_philo *philo)
 {
 	print_philo_status(philo, "is thinking");
 
-	usleep(200);
+	//usleep(200);
 	/*
 	if (usleep(200) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 	*/
+	if (usleep(200) == -1)
+		pthread_mutex_unlock(&(philo->data->mutex_error_management));
 }
 
 void	*philo_routine(void *arg)
@@ -77,11 +83,13 @@ void	*philo_routine(void *arg)
 	philo = arg;
 	if ((philo->number) % 2 == 0)
 	{
-		usleep(philo->data->time_to_eat * 500);
+		//usleep(philo->data->time_to_eat * 500);
 		/*
 		if (usleep(philo->data->time_to_eat * 500) == -1)
 			pthread_mutex_unlock(&(philo->data->mutex_error_management));
 		*/
+		if (usleep(philo->data->time_to_eat * 500) == -1)
+			pthread_mutex_unlock(&(philo->data->mutex_error_management));
 	}
 	while (philo->data->flag_finish == FALSE)
 	{
