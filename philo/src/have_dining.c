@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 16:07:03 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 16:42:22 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 static int	close_when_finished(t_setting *data)
 {
@@ -54,6 +55,11 @@ static int	invite_philos(t_setting *data)
 
 int	have_dining(t_setting *data)
 {
+	if (data->num_of_philos == 0)
+	{
+		printf("Finished: No one is invited!\n");
+		return (SUCCESS);
+	}
 	set_time_ms(&(data->ms_start_dining));
 	if (invite_philos(data) == FAIL)
 		return (FAIL);

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:51:36 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 16:06:26 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 16:39:11 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	*error_handling_routine(void *arg)
 	pthread_mutex_lock(&(data->mutex_flag_finish));
 	data->flag_finish = TRUE;
 	pthread_mutex_unlock(&(data->mutex_flag_finish));
-	printf("Activate error handling in a thread.\n");
+	error_with_msg("Activate error handling in a thread.");
 	return (NULL);
 }
