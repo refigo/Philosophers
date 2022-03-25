@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/24 12:47:32 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 16:06:44 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	set_forks_and_philos(t_setting *data)
 			return (error_with_msg("mutex init failed"));
 		data->philos[i].number = i + 1;
 		data->philos[i].l_fork = &(data->forks[i]);
-		data->philos[i].r_fork = &(data->forks[(i + 1) % (data->num_of_philos)]);
+		data->philos[i].r_fork = &(data->forks[\
+				(i + 1) % (data->num_of_philos)]);
 		if (pthread_mutex_init(&(data->philos[i].mutex_check_starvation), NULL) \
 				== FAIL)
 			return (error_with_msg("mutex init failed"));
@@ -62,7 +63,7 @@ static int	init_mutex_for_termination(t_setting *data)
 {
 	if (pthread_mutex_init(&(data->mutex_flag_finish), NULL) == FAIL)
 		return (error_with_msg("mutex init failed"));
-	if (pthread_mutex_init(&(data->mutex_error_management), NULL) == FAIL)
+	if (pthread_mutex_init(&(data->mutex_error_handling), NULL) == FAIL)
 		return (error_with_msg("mutex init failed"));
 	return (SUCCESS);
 }

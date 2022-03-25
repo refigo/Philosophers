@@ -6,14 +6,13 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 15:46:02 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/25 16:18:38 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-//# include <stdio.h>	// to remove?
 # include <stdlib.h>
 # include <pthread.h>
 
@@ -56,12 +55,9 @@ typedef struct s_setting
 	pthread_t		monitor_having_eaten_up_thread;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
-
-	pthread_t		error_management_thread;
-	pthread_mutex_t	mutex_error_management;
+	pthread_t		error_handling_thread;
+	pthread_mutex_t	mutex_error_handling;
 }				t_setting;
-
-void	*error_management_routine(void *arg);
 
 // set_data.c
 int			set_data(t_setting *data, int argc, char **argv);
@@ -76,8 +72,12 @@ void		*philo_routine(void *arg);
 void		*monitor_death_routine(void *arg);
 void		*monitor_having_eaten_up_routine(void *arg);
 
+// error_handling_routine.c
+void		*error_handling_routine(void *arg);
+
 // clear_data.c
 void		clear_data(t_setting *data);
+int			fail_with_clearing_data(t_setting *data);
 
 // utils
 size_t		mgo_strlen(const char *s);
@@ -92,11 +92,5 @@ long int	set_time_ms(long int *dest);
 
 void		print_philo_status(t_philo *philo, char *status);
 void		print_philo_died(t_philo *philo, long int ms_now);
-
-// test_philo.c
-void	test_overall(t_setting *data);
-void	test_setting(t_setting *data);
-void	test_philos(t_setting *data);
-// to remove
 
 #endif
