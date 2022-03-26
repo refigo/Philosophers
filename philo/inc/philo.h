@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 16:21:19 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 09:54:23 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		clear_data(t_setting *data);
 int			fail_with_clearing_data(t_setting *data);
 
 // utils
+int			are_args_only_nums(int argc, char **argv);
 size_t		mgo_strlen(const char *s);
 void		mgo_putstr_fd(char *s, int fd);
 int			mgo_atoi(const char *str);

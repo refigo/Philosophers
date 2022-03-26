@@ -6,22 +6,17 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 16:56:19 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 09:51:41 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <string.h>
 
-int	is_only_nums(t_setting *data, int argc, char **argv)
-{
-
-}
-
 static int	set_and_check_args(t_setting *data, int argc, char **argv)
 {
-	if (is_only_nums(data, argc, argv) == FALSE)
-		return (error_with_msg("not numbers inputed");
+	if (are_args_only_nums(argc, argv) == FALSE)
+		return (error_with_msg("not numbers inputed"));
 	data->num_of_philos = mgo_atoi(argv[1]);
 	data->time_to_die = mgo_atoi(argv[2]);
 	data->time_to_eat = mgo_atoi(argv[3]);

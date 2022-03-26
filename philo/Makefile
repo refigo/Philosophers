@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/03/25 16:21:36 by mgo              ###   ########.fr        #
+#    Updated: 2022/03/26 09:52:24 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_LIST	=	main.c \
 				monitor_routine.c \
 				error_handling_routine.c \
 				clear_data.c \
+				$(DIR_UTIL)are_args_only_nums.c \
 				$(DIR_UTIL)mgo_atoi.c \
 				$(DIR_UTIL)mgo_putstr_fd.c \
 				$(DIR_UTIL)mgo_strlen.c \
