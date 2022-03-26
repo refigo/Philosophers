@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 09:54:23 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 11:32:48 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_setting
 	pthread_mutex_t	mutex_flag_finish;
 	pthread_t		error_handling_thread;
 	pthread_mutex_t	mutex_error_handling;
+	int				error_in_thread;
 }				t_setting;
 
 // set_data.c
