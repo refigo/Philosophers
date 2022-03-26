@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 16:50:03 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/19 14:23:31 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 12:48:19 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdlib.h>
 
 void	*mgo_calloc(size_t count, size_t size)
 {

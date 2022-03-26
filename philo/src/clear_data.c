@@ -6,11 +6,12 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:12:10 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 11:47:21 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 12:47:58 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdlib.h>
 
 int	fail_with_clearing_data(t_setting *data)
 {
