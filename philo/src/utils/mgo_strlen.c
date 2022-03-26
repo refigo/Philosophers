@@ -6,11 +6,11 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:27:14 by mgo               #+#    #+#             */
-/*   Updated: 2022/02/24 13:41:56 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 13:07:21 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
 size_t	mgo_strlen(const char *s)
 {
