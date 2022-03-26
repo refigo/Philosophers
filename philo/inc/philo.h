@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 11:32:48 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 12:36:01 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_setting
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	long int		ms_start_dining;
-	int				num_philos_done;
 	pthread_t		monitor_having_eaten_up_thread;
+	int				num_philos_done;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
 	pthread_t		error_handling_thread;
@@ -88,7 +88,7 @@ int			mgo_atoi(const char *str);
 int			error_with_msg(char *msg);
 void		*mgo_calloc(size_t count, size_t size);
 long int	set_time_ms(long int *dest);
-void		print_philo_status(t_philo *philo, char *status);
-void		print_philo_died(t_philo *philo, long int ms_now);
+int			print_philo_status(t_philo *philo, char *status);
+int			print_philo_died(t_philo *philo, long int ms_now);
 
 #endif

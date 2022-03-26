@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/25 16:07:18 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/26 12:35:45 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@ static void	taking_forks(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(philo->l_fork);
-	print_philo_status(philo, "has taken a fork");
+	if (print_philo_status(philo, "has taken a fork") == FAIL)
+		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	while (data->num_of_philos == 1 && data->flag_finish == FALSE)
 		;
 	if (data->num_of_philos == 1 && data->flag_finish == TRUE)
 		return ;
 	pthread_mutex_lock(philo->r_fork);
-	print_philo_status(philo, "has taken a fork");
+	if (print_philo_status(philo, "has taken a fork") == FAIL)
+		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
 
 static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_check_starvation);
-	print_philo_status(philo, "is eating");
+	if (print_philo_status(philo, "is eating") == FAIL)
+		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	set_time_ms(&(philo->ms_eat_last));
 	(philo->num_eat)++;
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
@@ -45,14 +48,16 @@ static void	eating(t_philo *philo)
 
 static void	sleeping(t_philo *philo)
 {
-	print_philo_status(philo, "is sleeping");
+	if (print_philo_status(philo, "is sleeping") == FAIL)
+		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	if (usleep(philo->data->time_to_sleep * 1000) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
 
 static void	thinking(t_philo *philo)
 {
-	print_philo_status(philo, "is thinking");
+	if (print_philo_status(philo, "is thinking") == FAIL)
+		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	if (usleep(200) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
