@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 12:35:45 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/27 13:05:41 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void	eating(t_philo *philo)
 	(philo->num_eat)++;
 	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
 		(philo->data->num_philos_done)++;
+	pthread_mutex_unlock(&philo->mutex_check_starvation);
 	if (usleep(philo->data->time_to_eat * 1000) == -1)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	pthread_mutex_unlock(&philo->mutex_check_starvation);
 }
 
 static void	sleeping(t_philo *philo)
