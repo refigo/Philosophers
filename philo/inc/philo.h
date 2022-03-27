@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 12:48:26 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/27 12:40:39 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ enum e_bool
 
 enum e_valid
 {
-	SUCCESS,
-	FAIL
+	FAIL = -1,
+	SUCCESS
 };
 
 typedef struct s_philo
