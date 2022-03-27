@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/27 13:01:24 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/27 13:33:44 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ static int	close_when_finished(t_setting *data)
 	}
 	pthread_join(data->monitor_having_eaten_up_thread, NULL);
 	return (SUCCESS);
+}
+
+int	fail_with_detaching(t_setting *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		pthread_detach(data->philos[i].philo_thread);
+		pthread_detach(data->philos[i].monitor_death_thread);
+	}
+	pthread_detach(data->monitor_having_eaten_up_thread);
+	return (FAIL);
 }
 
 static int	invite_philos(t_setting *data)
@@ -51,20 +65,6 @@ static int	invite_philos(t_setting *data)
 		return (error_with_msg("pthread_create failed"));
 	pthread_detach(data->error_handling_thread);
 	return (SUCCESS);
-}
-
-int	fail_with_detaching(t_setting *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->num_of_philos)
-	{
-		pthread_detach(data->philos[i].philo_thread);
-		pthread_detach(data->philos[i].monitor_death_thread);
-	}
-	pthread_detach(data->monitor_having_eaten_up_thread);
-	return (FAIL);
 }
 
 int	have_dining(t_setting *data)

@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:43:13 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 09:51:41 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/27 13:36:36 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static int	set_forks_and_philos(t_setting *data)
 	i = -1;
 	while (++i < data->num_of_philos)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) == FAIL)
+		if (pthread_mutex_init(&(data->forks[i]), NULL) != SUCCESS)
 			return (error_with_msg("mutex init failed"));
 		data->philos[i].number = i + 1;
 		data->philos[i].l_fork = &(data->forks[i]);
 		data->philos[i].r_fork = &(data->forks[\
 				(i + 1) % (data->num_of_philos)]);
 		if (pthread_mutex_init(&(data->philos[i].mutex_check_starvation), NULL) \
-				== FAIL)
+				!= SUCCESS)
 			return (error_with_msg("mutex init failed"));
 		data->philos[i].data = data;
 	}
@@ -63,9 +63,9 @@ static int	set_forks_and_philos(t_setting *data)
 
 static int	init_mutex_for_termination(t_setting *data)
 {
-	if (pthread_mutex_init(&(data->mutex_flag_finish), NULL) == FAIL)
+	if (pthread_mutex_init(&(data->mutex_flag_finish), NULL) != SUCCESS)
 		return (error_with_msg("mutex init failed"));
-	if (pthread_mutex_init(&(data->mutex_error_handling), NULL) == FAIL)
+	if (pthread_mutex_init(&(data->mutex_error_handling), NULL) != SUCCESS)
 		return (error_with_msg("mutex init failed"));
 	return (SUCCESS);
 }
@@ -76,8 +76,8 @@ int	set_data(t_setting *data, int argc, char **argv)
 	if (set_and_check_args(data, argc, argv) == FAIL)
 		return (FAIL);
 	if (set_forks_and_philos(data) == FAIL)
-		return (FAIL);
+		return (fail_with_clearing_data(data));
 	if (init_mutex_for_termination(data) == FAIL)
-		return (FAIL);
+		return (fail_with_clearing_data(data));
 	return (SUCCESS);
 }
