@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/26 11:32:45 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/27 13:01:24 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ static int	invite_philos(t_setting *data)
 	return (SUCCESS);
 }
 
+int	fail_with_detaching(t_setting *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		pthread_detach(data->philos[i].philo_thread);
+		pthread_detach(data->philos[i].monitor_death_thread);
+	}
+	pthread_detach(data->monitor_having_eaten_up_thread);
+	return (FAIL);
+}
+
 int	have_dining(t_setting *data)
 {
 	if (data->num_of_philos == 0)
@@ -62,7 +76,7 @@ int	have_dining(t_setting *data)
 	}
 	set_time_ms(&(data->ms_start_dining));
 	if (invite_philos(data) == FAIL)
-		return (FAIL);
+		return (fail_with_detaching(data));
 	close_when_finished(data);
 	if (data->error_in_thread == TRUE)
 		return (FAIL);
