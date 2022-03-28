@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/27 12:40:39 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/28 16:41:45 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_philo
 {
 	int					number;
 	pthread_t			philo_thread;
-	pthread_t			monitor_death_thread;
+	//pthread_t			monitor_death_thread;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
 	long int			ms_eat_last;
@@ -50,6 +50,7 @@ typedef struct s_setting
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	long int		ms_start_dining;
+	pthread_t			monitor_death_thread;
 	pthread_t		monitor_having_eaten_up_thread;
 	int				num_philos_done;
 	int				flag_finish;

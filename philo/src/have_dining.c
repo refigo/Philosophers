@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/27 13:33:44 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/28 16:46:47 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static int	close_when_finished(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		pthread_join(data->philos[i].philo_thread, NULL);
-		pthread_join(data->philos[i].monitor_death_thread, NULL);
+		//pthread_join(data->philos[i].monitor_death_thread, NULL);
 	}
+	pthread_join(data->monitor_death_thread, NULL);
 	pthread_join(data->monitor_having_eaten_up_thread, NULL);
 	return (SUCCESS);
 }
@@ -35,8 +36,9 @@ int	fail_with_detaching(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		pthread_detach(data->philos[i].philo_thread);
-		pthread_detach(data->philos[i].monitor_death_thread);
+		//pthread_detach(data->philos[i].monitor_death_thread);
 	}
+	pthread_detach(data->monitor_death_thread, NULL);
 	pthread_detach(data->monitor_having_eaten_up_thread);
 	return (FAIL);
 }
@@ -53,10 +55,10 @@ static int	invite_philos(t_setting *data)
 		if (pthread_create(&(data->philos[i].philo_thread), NULL, \
 				philo_routine, &(data->philos[i])) != SUCCESS)
 			return (error_with_msg("pthread_create failed"));
-		if (pthread_create(&(data->philos[i].monitor_death_thread), NULL, \
-				monitor_death_routine, &(data->philos[i])) != SUCCESS)
-			return (error_with_msg("pthread_create failed"));
 	}
+	if (pthread_create(&(data->monitor_death_thread), NULL, \
+				monitor_death_routine, data) != SUCCESS)
+		return (error_with_msg("pthread_create failed"));
 	if (pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
 			monitor_having_eaten_up_routine, data) != SUCCESS)
 		return (error_with_msg("pthread_create failed"));
