@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/28 16:46:47 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 13:04:34 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	fail_with_detaching(t_setting *data)
 		pthread_detach(data->philos[i].philo_thread);
 		//pthread_detach(data->philos[i].monitor_death_thread);
 	}
-	pthread_detach(data->monitor_death_thread, NULL);
+	pthread_detach(data->monitor_death_thread);
 	pthread_detach(data->monitor_having_eaten_up_thread);
 	return (FAIL);
 }
