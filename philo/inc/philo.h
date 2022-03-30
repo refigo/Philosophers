@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 17:43:07 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 17:53:17 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ typedef struct s_setting
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;
 	pthread_t		monitor_death_thread;
-	pthread_t		monitor_having_eaten_up_thread;
-	int				num_philos_done;
+	pthread_t		monitor_full_thread;
+	int				num_philos_full;
 	pthread_t		error_handling_thread;
 	pthread_mutex_t	mutex_error_handling;
-	int				is_error_in_thread;
+	int				error_in_thread;
 }				t_setting;
 
 // set_data.c
@@ -72,7 +72,7 @@ void		*philo_routine(void *arg);
 
 // monitor_routine.c
 void		*monitor_death_routine(void *arg);
-void		*monitor_having_eaten_up_routine(void *arg);
+void		*monitor_full_routine(void *arg);
 
 // error_handling_routine.c
 void		*error_handling_routine(void *arg);

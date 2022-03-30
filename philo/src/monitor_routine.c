@@ -6,23 +6,23 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 15:51:23 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 17:51:46 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 
-static void	check_having_eaten_up_to_finish(t_setting *data)
+static void	check_full_to_finish(t_setting *data)
 {
-	if (data->num_philos_done == data->num_of_philos)
+	if (data->num_philos_full == data->num_of_philos)
 	{
 		printf("Finish: All philosophers have eaten up each dishes!\n");
 		data->flag_finish = TRUE;
 	}
 }
 
-void	*monitor_having_eaten_up_routine(void *arg)
+void	*monitor_full_routine(void *arg)
 {
 	t_setting	*data;
 
@@ -31,7 +31,7 @@ void	*monitor_having_eaten_up_routine(void *arg)
 	{
 		pthread_mutex_lock(&(data->mutex_flag_finish));
 		if (data->flag_finish == FALSE)
-			check_having_eaten_up_to_finish(data);
+			check_full_to_finish(data);
 		pthread_mutex_unlock(&(data->mutex_flag_finish));
 	}
 	return (NULL);
