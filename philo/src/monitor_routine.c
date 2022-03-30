@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 18:14:37 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 19:23:09 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ void	*monitor_death_routine(void *arg)
 		i = -1;
 		while (++i < data->num_of_philos && data->flag_finish == FALSE)
 		{
+			pthread_mutex_lock(&(data->philos[i].mutex_check_starvation));
 			pthread_mutex_lock(&(data->mutex_flag_finish));
 			if (data->flag_finish == FALSE)
 				check_death_to_finish(&(data->philos[i]));
 			pthread_mutex_unlock(&(data->mutex_flag_finish));
+			pthread_mutex_unlock(&(data->philos[i].mutex_check_starvation));
 		}
 	}
 	return (NULL);

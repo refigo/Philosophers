@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 18:39:42 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 19:05:51 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	close_when_finished(t_setting *data)
 	pthread_join(data->monitor_full_thread, NULL);
 }
 
-int	error_with_joining_previous(t_setting *data, int last_index)
+static int	error_with_joining_previous(t_setting *data, int last_index)
 {
 	int	i;
 
