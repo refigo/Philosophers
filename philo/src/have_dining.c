@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 13:04:34 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 15:51:33 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int	close_when_finished(t_setting *data)
 
 	i = -1;
 	while (++i < data->num_of_philos)
-	{
 		pthread_join(data->philos[i].philo_thread, NULL);
-		//pthread_join(data->philos[i].monitor_death_thread, NULL);
-	}
 	pthread_join(data->monitor_death_thread, NULL);
 	pthread_join(data->monitor_having_eaten_up_thread, NULL);
 	return (SUCCESS);
@@ -34,10 +31,7 @@ int	fail_with_detaching(t_setting *data)
 
 	i = -1;
 	while (++i < data->num_of_philos)
-	{
 		pthread_detach(data->philos[i].philo_thread);
-		//pthread_detach(data->philos[i].monitor_death_thread);
-	}
 	pthread_detach(data->monitor_death_thread);
 	pthread_detach(data->monitor_having_eaten_up_thread);
 	return (FAIL);
@@ -73,7 +67,7 @@ int	have_dining(t_setting *data)
 {
 	if (data->num_of_philos == 0)
 	{
-		printf("Finished: No one is invited!\n");
+		printf("Finish: No one is invited!\n");
 		return (SUCCESS);
 	}
 	set_time_ms(&(data->ms_start_dining));
