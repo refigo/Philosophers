@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 15:51:33 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 17:35:01 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ int	fail_with_detaching(t_setting *data)
 	return (FAIL);
 }
 
+int	error_with_joining_previous(t_setting *data, int last_index)
+{
+	int	i;
+
+	pthread_mutex_lock(&(data->mutex_flag_finish));
+	data->flag_finish = TRUE;
+	pthread_mutex_unlock(&(data->mutex_flag_finish));
+	i = -1;
+	while (++i < last_index)
+		pthread_join(data->philos[i].philo_thread, NULL);
+	return (error_with_msg("pthread_create failed"));
+}
+
 static int	invite_philos(t_setting *data)
 {
 	int	i;
@@ -48,7 +61,7 @@ static int	invite_philos(t_setting *data)
 		data->philos[i].ms_eat_last = data->ms_start_dining;
 		if (pthread_create(&(data->philos[i].philo_thread), NULL, \
 				philo_routine, &(data->philos[i])) != SUCCESS)
-			return (error_with_msg("pthread_create failed"));
+			return (error_with_joining_previous(data, i));
 	}
 	if (pthread_create(&(data->monitor_death_thread), NULL, \
 				monitor_death_routine, data) != SUCCESS)
@@ -56,6 +69,7 @@ static int	invite_philos(t_setting *data)
 	if (pthread_create(&(data->monitor_having_eaten_up_thread), NULL, \
 			monitor_having_eaten_up_routine, data) != SUCCESS)
 		return (error_with_msg("pthread_create failed"));
+	pthread_detach(data->monitor_having_eaten_up_thread);
 	if (pthread_create(&(data->error_handling_thread), NULL, \
 			error_handling_routine, data) != SUCCESS)
 		return (error_with_msg("pthread_create failed"));

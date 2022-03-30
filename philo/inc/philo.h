@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 16:55:16 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 17:43:07 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ typedef struct s_setting
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	long int		ms_start_dining;
+	int				flag_finish;
+	pthread_mutex_t	mutex_flag_finish;
 	pthread_t		monitor_death_thread;
 	pthread_t		monitor_having_eaten_up_thread;
 	int				num_philos_done;
-	int				flag_finish;
-	pthread_mutex_t	mutex_flag_finish;
 	pthread_t		error_handling_thread;
 	pthread_mutex_t	mutex_error_handling;
-	int				error_in_thread;
+	int				is_error_in_thread;
 }				t_setting;
 
 // set_data.c
