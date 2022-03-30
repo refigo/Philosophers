@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:21:50 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 17:51:46 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 18:14:37 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	check_full_to_finish(t_setting *data)
 {
 	if (data->num_philos_full == data->num_of_philos)
 	{
-		printf("Finish: All philosophers have eaten up each dishes!\n");
+		printf("Finish: All philosophers are full!\n");
 		data->flag_finish = TRUE;
 	}
 }

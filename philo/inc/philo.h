@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 09:07:25 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 17:53:17 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 18:12:20 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_setting
 	int				num_philos_full;
 	pthread_t		error_handling_thread;
 	pthread_mutex_t	mutex_error_handling;
-	int				error_in_thread;
+	int				is_error_in_thread;
 }				t_setting;
 
 // set_data.c

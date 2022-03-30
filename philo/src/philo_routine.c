@@ -6,7 +6,7 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:19:24 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 17:54:03 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 18:12:31 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ static void	eating(t_philo *philo)
 	if (print_philo_status(philo, "is eating") == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	set_time_ms(&(philo->ms_eat_last));
-	(philo->num_eat)++;
-	if (philo->num_eat == philo->data->num_of_times_each_must_eat)
-		(philo->data->num_philos_full)++;
+	if (philo->num_eat < philo->data->num_of_times_each_must_eat)
+	{
+		(philo->num_eat)++;
+		if (philo->num_eat == philo->data->num_of_times_each_must_eat)
+			(philo->data->num_philos_full) += 1;
+	}
 	pthread_mutex_unlock(&philo->mutex_check_starvation);
 	if (sleep_shortly_ms(philo->data->time_to_eat) == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));

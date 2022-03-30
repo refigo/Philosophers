@@ -6,14 +6,14 @@
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 14:11:26 by mgo               #+#    #+#             */
-/*   Updated: 2022/03/30 18:02:59 by mgo              ###   ########.fr       */
+/*   Updated: 2022/03/30 18:39:42 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 
-static int	close_when_finished(t_setting *data)
+static void	close_when_finished(t_setting *data)
 {
 	int		i;
 
@@ -21,18 +21,7 @@ static int	close_when_finished(t_setting *data)
 	while (++i < data->num_of_philos)
 		pthread_join(data->philos[i].philo_thread, NULL);
 	pthread_join(data->monitor_death_thread, NULL);
-	return (SUCCESS);
-}
-
-int	fail_with_detaching(t_setting *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->num_of_philos)
-		pthread_detach(data->philos[i].philo_thread);
-	pthread_detach(data->monitor_death_thread);
-	return (FAIL);
+	pthread_join(data->monitor_full_thread, NULL);
 }
 
 int	error_with_joining_previous(t_setting *data, int last_index)
@@ -45,6 +34,10 @@ int	error_with_joining_previous(t_setting *data, int last_index)
 	i = -1;
 	while (++i < last_index)
 		pthread_join(data->philos[i].philo_thread, NULL);
+	if (data->monitor_death_thread != NULL)
+		pthread_join(data->monitor_death_thread, NULL);
+	if (data->monitor_full_thread != NULL)
+		pthread_join(data->monitor_full_thread, NULL);
 	return (error_with_msg("pthread_create failed"));
 }
 
@@ -63,15 +56,12 @@ static int	invite_philos(t_setting *data)
 			return (error_with_joining_previous(data, i));
 	}
 	if (pthread_create(&(data->monitor_death_thread), NULL, \
-				monitor_death_routine, data) != SUCCESS)
-		return (error_with_msg("pthread_create failed"));
-	if (pthread_create(&(data->monitor_full_thread), NULL, \
-			monitor_full_routine, data) != SUCCESS)
-		return (error_with_msg("pthread_create failed"));
-	pthread_detach(data->monitor_full_thread);
-	if (pthread_create(&(data->error_handling_thread), NULL, \
-			error_handling_routine, data) != SUCCESS)
-		return (error_with_msg("pthread_create failed"));
+				monitor_death_routine, data) != SUCCESS \
+		|| pthread_create(&(data->monitor_full_thread), NULL, \
+				monitor_full_routine, data) != SUCCESS \
+		|| pthread_create(&(data->error_handling_thread), NULL, \
+				error_handling_routine, data) != SUCCESS)
+		return (error_with_joining_previous(data, i));
 	pthread_detach(data->error_handling_thread);
 	return (SUCCESS);
 }
@@ -84,9 +74,9 @@ int	have_dining(t_setting *data)
 		return (SUCCESS);
 	}
 	if (invite_philos(data) == FAIL)
-		return (fail_with_detaching(data));
+		return (FAIL);
 	close_when_finished(data);
-	if (data->error_in_thread == TRUE)
+	if (data->is_error_in_thread == TRUE)
 		return (FAIL);
 	return (SUCCESS);
 }
