@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo_bonus.h"
+
 int	main(void)
 {
+	printf("philo_bonus: hello world!\n");
 	return (0);
 }
