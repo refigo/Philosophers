@@ -12,6 +12,9 @@
 
 #include "philo_bonus.h"
 
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/wait.h>
 void	clear_data(t_setting *data)
 {
 	int	i;
@@ -23,8 +26,8 @@ void	clear_data(t_setting *data)
 	i = -1;
 	while (++i < data->num_of_philos)
 	{
-		//kill
-		//waitpid
+		kill(data->philos[i].philo_pid, SIGKILL); // check
+		waitpid(data->philos[i].philo_pid, NULL, WNOHANG);
 	}
 	free(data->philos); // todo: check
 }
