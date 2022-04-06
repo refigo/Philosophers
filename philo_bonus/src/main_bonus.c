@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	printf("philo_bonus: hello world!\n");
 	if ((argc != 5) && (argc != 6))
 		return (error_with_msg("the number of argment is wrong!\n\
-Usage: ./philos number_of_philos time_to_die time_to_eat time_to_sleep \
+Usage: ./philos_bonus number_of_philos time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosophers_must_eat]"));
 
 	set_data(&data, argc, argv);

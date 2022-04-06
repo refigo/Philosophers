@@ -35,6 +35,42 @@ static int	set_and_check_args(t_setting *data, int argc, char **argv)
 		return (error_with_msg("number_of_times_each_philosopher_must_eat"));
 	return (SUCCESS);
 }
+
+static int	set_semaphore(sem_t **sem, const char *file, unsigned int value)
+{
+	*sem = sem_open(file, O_CREAT, 0644, value);
+	if (*sem == SEM_FAILED)
+		return (FAIL);
+	return (SUCCESS);
+}
+
+static int	set_forks_philos_and_sems(t_setting *data)
+{
+	data->philos = mgo_calloc(data->num_of_philos, sizeof(t_philo));
+	if (data->philos == NULL)
+		return (FAIL);
+	data->forks_file = "/sem_forks";
+	data->termination_file = "/sem_termination";
+	data->print_mutex_file = "/sem_print_mutex";
+	data->full_file = "/sem_full";
+	if (set_semaphore(&(data->forks), data->forks_file, data->num_of_philos) \
+	|| set_semaphore(&(data->termination_sem), data->termination_file, 0) \
+	|| set_semaphore(&(data->print_mutex_sem), data->print_mutex_file, 1) \
+	|| set_semaphore(&(data->full_sem), data->full_file, 0))
+		return (FAIL); // todo: check
+	return (SUCCESS);
+}
+
+int	set_data(t_setting *data, int argc, char **argv)
+{
+	memset(data, 0, sizeof(t_setting));
+	if (set_and_check_args(data, argc, argv) == FAIL)
+		return (FAIL);
+	if (set_forks_philos_and_sems(data))
+		return (FAIL);	// todo: check
+	return (SUCCESS);
+}
+
 /*
 static int	set_forks_and_philos(t_setting *data)
 {
@@ -73,21 +109,3 @@ static int	init_mutex_for_termination(t_setting *data)
 	return (SUCCESS);
 }
 */
-
-int	set_data(t_setting *data, int argc, char **argv)
-{
-	memset(data, 0, sizeof(t_setting));
-	if (set_and_check_args(data, argc, argv) == FAIL)
-		return (FAIL);
-	/*
-	if (set_forks_and_philos(data) == FAIL)
-		return (fail_with_clearing_data(data));
-	*/
-
-	/*
-	if (init_mutex_for_termination(data) == FAIL)
-		return (fail_with_clearing_data(data));
-	*/
-	return (SUCCESS);
-}
-

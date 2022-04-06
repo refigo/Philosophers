@@ -34,9 +34,9 @@ enum e_valid
 typedef struct s_philo
 {
 	int					number;
-	pthread_t			philo_thread;
+	pid_t				philo_pid;
+	pthread_t			monitor_thread;
 	long int			ms_eat_last;
-	pthread_mutex_t		mutex_check_starvation;
 	int					num_eat;
 	struct s_setting	*data;
 }				t_philo;
@@ -48,8 +48,20 @@ typedef struct s_setting
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_of_times_each_must_eat;
+
 	t_philo			*philos;
-	sem_t			forks;
+	sem_t			*forks;
+	char			*forks_file;
+	long int		ms_start_dining;
+
+	sem_t			*termination_sem;
+	sem_t			*print_mutex_sem;
+	sem_t			*full_sem;
+	//sem_t			error_sem;
+	char			*termination_file;
+	char			*print_mutex_file;
+	char			*full_file;
+	//char			*error_file;
 }				t_setting;
 
 

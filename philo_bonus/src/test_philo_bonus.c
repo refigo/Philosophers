@@ -22,6 +22,12 @@ void	test_data(t_setting *data)
 	printf("time_to_sleep: [%d]\n", data->time_to_sleep);
 	printf("num_of_times_each_must_eat: [%d]\n", data->num_of_times_each_must_eat);
 
+	printf("data->philos: [%p]\n", data->philos);
+	printf("data->forks: [%p]\n", data->forks);
+	printf("data->termination_sem: [%p]\n", data->termination_sem);
+	printf("data->print_mutex_sem: [%p]\n", data->print_mutex_sem);
+	printf("data->full_sem: [%p]\n", data->full_sem);
+
 	printf("--- Done test_set_data\n");
 }
 
