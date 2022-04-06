@@ -74,6 +74,10 @@ int	set_data(t_setting *data, int argc, char **argv);
 // have_dining_bonus.c
 int	have_dining(t_setting *data);
 
+// monitor_routine_bonus.c
+void	*monitor_full_routine(void *arg);
+void	*monitor_death_routine(void *arg);
+
 // utils
 int	are_args_only_nums(int argc, char **argv);
 int	mgo_atoi(const char *str);

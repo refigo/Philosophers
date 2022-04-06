@@ -14,52 +14,6 @@
 #include <unistd.h> // fork()
 #include <stdlib.h> // exit()
 
-void	*monitor_full_routine(void *arg)
-{
-	t_setting	*data;
-	int			count_full;
-
-	data = (t_setting *)arg;
-	count_full = 0;
-	while (TRUE)
-	{
-		sem_wait(data->full_sem); // todo: error
-		count_full++;
-		if (count_full == data->num_of_philos)
-		{
-			sem_wait(data->print_mutex_sem);
-			printf("Finish: full\n");
-			sem_post(data->termination_sem);
-			break ;
-		}
-	}
-	return (NULL);
-}
-
-void	*monitor_death_routine(void *arg)
-{
-	t_philo		*philo;
-	long int	ms_now;
-	long int	diff_time_eating;
-
-	philo = (t_philo *)arg;
-	sleep_shortly_ms(philo->data->time_to_die - 10);
-	while (TRUE)
-	{
-		sem_wait(philo->data->print_mutex_sem);
-		set_time_ms(&ms_now);
-		diff_time_eating = ms_now - philo->ms_eat_last;
-		if (diff_time_eating >= philo->data->time_to_die)
-		{
-			print_philo_died(philo, ms_now);
-			sem_post(philo->data->termination_sem);
-			break ;
-		}
-		sem_post(philo->data->print_mutex_sem);
-	}
-	return (NULL);
-}
-
 void	process_philo(t_philo *philo)
 {
 	pthread_create(&(philo->monitor_death_thread), NULL, monitor_death_routine, philo);
