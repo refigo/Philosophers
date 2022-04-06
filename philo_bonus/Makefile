@@ -43,6 +43,8 @@ SRC_LIST	=	main_bonus.c \
 				$(DIR_UTIL)mgo_strlen_bonus.c \
 				$(DIR_UTIL)error_with_msg_bonus.c \
 				$(DIR_UTIL)set_time_ms_bonus.c \
+				$(DIR_UTIL)sleep_shortly_ms_bonus.c \
+				$(DIR_UTIL)print_philos_bonus.c \
 				test_philo_bonus.c
 SRC			=	$(addprefix $(SRC_PATH), $(SRC_LIST))
 

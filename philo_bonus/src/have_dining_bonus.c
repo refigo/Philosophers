@@ -14,9 +14,41 @@
 #include <unistd.h> // fork()
 #include <stdlib.h> // exit()
 
+void	*monitor_routine(void *arg)
+{
+	t_philo		*philo;
+	long int	ms_now;
+	long int	diff_time_eating;
+
+	philo = (t_philo *)arg;
+	sleep_shortly_ms(philo->data->time_to_die - 10);
+	while (TRUE)
+	{
+		sem_wait(philo->data->print_mutex_sem);
+		set_time_ms(&ms_now);
+		diff_time_eating = ms_now - philo->ms_eat_last;
+		if (diff_time_eating >= philo->data->time_to_die)
+		{
+			print_philo_died(philo, ms_now);
+			sem_post(philo->data->termination_sem);
+			break ;
+		}
+		sem_post(philo->data->print_mutex_sem);
+	}
+	return (NULL);
+}
+
 void	process_philo(t_philo *philo)
 {
-	(void)philo;
+	pthread_create(&(philo->monitor_thread), NULL, monitor_routine, philo);
+	//if (philo->number % 2 == 0)
+	while (TRUE)
+	{
+		//taking_forks(philo);
+		//eating
+		//sleeping
+		//thinking
+	}
 }
 
 int	invite_philos(t_setting *data)
@@ -37,7 +69,7 @@ int	invite_philos(t_setting *data)
 		else if (data->philos[i].philo_pid == -1)
 			return (FAIL);
 	}
-	sem_wait(data->termination_sem);
+	sem_wait(data->termination_sem); // todo: error check
 	return (SUCCESS);
 }
 
@@ -48,7 +80,7 @@ int	have_dining(t_setting *data)
 		printf("Finish: No one is invited!\n");
 		return (SUCCESS);
 	}
-	//invite_philos
+	invite_philos(data);
 	//close_when_finished
 	return (SUCCESS);
 }

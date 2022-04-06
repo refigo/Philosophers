@@ -19,6 +19,8 @@
 // to remove
 # include <stdio.h>
 
+# define EPSILON 300
+
 enum e_bool
 {
 	FALSE,
@@ -79,6 +81,9 @@ void	mgo_putstr_fd(char *s, int fd);
 size_t	mgo_strlen(const char *s);
 int	error_with_msg(char *msg);
 long int	set_time_ms(long int *dest);
+int	sleep_shortly_ms(long int ms_sleep);
+int	print_philo_died(t_philo *philo, long int ms_now);
+int	print_philo_status(t_philo *philo, char *status);
 
 // test
 void	test_data(t_setting *data);
