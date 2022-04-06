@@ -46,9 +46,17 @@ static int	set_semaphore(sem_t **sem, const char *file, unsigned int value)
 
 static int	set_forks_philos_and_sems(t_setting *data)
 {
+	int	i;
+
 	data->philos = mgo_calloc(data->num_of_philos, sizeof(t_philo));
 	if (data->philos == NULL)
 		return (FAIL);
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		data->philos[i].number = i + 1;
+		data->philos[i].data = data; // todo: consider
+	}
 	data->forks_file = "/sem_forks";
 	data->termination_file = "/sem_termination";
 	data->print_mutex_file = "/sem_print_mutex";

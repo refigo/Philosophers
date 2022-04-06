@@ -68,6 +68,9 @@ typedef struct s_setting
 // set_data_bonus.c
 int	set_data(t_setting *data, int argc, char **argv);
 
+// have_dining_bonus.c
+int	have_dining(t_setting *data);
+
 // utils
 int	are_args_only_nums(int argc, char **argv);
 int	mgo_atoi(const char *str);
@@ -75,6 +78,7 @@ void	*mgo_calloc(size_t count, size_t size);
 void	mgo_putstr_fd(char *s, int fd);
 size_t	mgo_strlen(const char *s);
 int	error_with_msg(char *msg);
+long int	set_time_ms(long int *dest);
 
 // test
 void	test_data(t_setting *data);

@@ -23,6 +23,8 @@ Usage: ./philos_bonus number_of_philos time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosophers_must_eat]"));
 
 	set_data(&data, argc, argv);
+	
+	have_dining(&data);
 
 	test_data(&data);
 	return (0);
