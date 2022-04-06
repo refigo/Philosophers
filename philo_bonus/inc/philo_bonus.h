@@ -37,7 +37,7 @@ typedef struct s_philo
 {
 	int					number;
 	pid_t				philo_pid;
-	pthread_t			monitor_thread;
+	pthread_t			monitor_death_thread;
 	long int			ms_eat_last;
 	int					num_eat;
 	struct s_setting	*data;
@@ -55,6 +55,7 @@ typedef struct s_setting
 	sem_t			*forks;
 	char			*forks_file;
 	long int		ms_start_dining;
+	pthread_t		monitor_full_thread;
 
 	sem_t			*termination_sem;
 	sem_t			*print_mutex_sem;
