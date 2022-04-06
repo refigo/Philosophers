@@ -14,7 +14,19 @@
 
 void	clear_data(t_setting *data)
 {
-	(void)data;
+	int	i;
+
+	sem_unlink(data->forks_file);
+	sem_unlink(data->termination_file);
+	sem_unlink(data->print_mutex_file);
+	sem_unlink(data->full_file);
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		//kill
+		//waitpid
+	}
+	free(data->philos); // todo: check
 }
 
 int	main(int argc, char **argv)
