@@ -33,7 +33,15 @@ SRC_PATH	=	./src/
 DIR_UTIL	=	utils/
 OBJ_PATH	=	./obj/
 
-SRC_LIST	=	main.c
+SRC_LIST	=	main_bonus.c \
+				set_data_bonus.c \
+				$(DIR_UTIL)are_args_only_nums_bonus.c \
+				$(DIR_UTIL)mgo_atoi_bonus.c \
+				$(DIR_UTIL)mgo_calloc_bonus.c \
+				$(DIR_UTIL)mgo_putstr_fd_bonus.c \
+				$(DIR_UTIL)mgo_strlen_bonus.c \
+				$(DIR_UTIL)error_with_msg_bonus.c \
+				test_philo_bonus.c
 SRC			=	$(addprefix $(SRC_PATH), $(SRC_LIST))
 
 OBJ_LIST	=	$(SRC_LIST:.c=.o)

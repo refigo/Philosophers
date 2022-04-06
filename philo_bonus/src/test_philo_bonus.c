@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*   test_philo_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 20:19:19 by mgo               #+#    #+#             */
-/*   Updated: 2022/04/05 20:19:21 by mgo              ###   ########.fr       */
+/*   Created: 2022/04/06 09:14:02 by mgo               #+#    #+#             */
+/*   Updated: 2022/04/06 09:18:22 by mgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_BONUS_H
-# define PHILO_BONUS_H
+#include "philo_bonus.h"
 
-# include <pthread.h>
-# include <semaphore.h>
-
-// to remove
-# include <stdio.h>
-
-enum e_bool
+void	test_data(t_setting *data)
 {
-	FALSE,
-	TRUE
-};
+	printf("--- Start test_set_data\n");
 
-enum e_valid
-{
-	FAIL = -1,
-	SUCCESS
-};
+	printf("num_of_philos: [%d]\n", data->num_of_philos);
+	printf("time_to_die: [%d]\n", data->time_to_die);
+	printf("time_to_eat: [%d]\n", data->time_to_eat);
+	printf("time_to_sleep: [%d]\n", data->time_to_sleep);
+	printf("num_of_times_each_must_eat: [%d]\n", data->num_of_times_each_must_eat);
+
+	printf("--- Done test_set_data\n");
+}
+
+/*
 
 typedef struct s_philo
 {
@@ -52,19 +48,4 @@ typedef struct s_setting
 	sem_t			forks;
 }				t_setting;
 
-
-// set_data_bonus.c
-int	set_data(t_setting *data, int argc, char **argv);
-
-// utils
-int	are_args_only_nums(int argc, char **argv);
-int	mgo_atoi(const char *str);
-void	*mgo_calloc(size_t count, size_t size);
-void	mgo_putstr_fd(char *s, int fd);
-size_t	mgo_strlen(const char *s);
-int	error_with_msg(char *msg);
-
-// test
-void	test_data(t_setting *data);
-
-#endif
+*/
