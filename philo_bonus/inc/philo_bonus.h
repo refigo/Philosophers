@@ -74,6 +74,9 @@ int	set_data(t_setting *data, int argc, char **argv);
 // have_dining_bonus.c
 int	have_dining(t_setting *data);
 
+// process_philo_bonus.c
+void	process_philo(t_philo *philo);
+
 // monitor_routine_bonus.c
 void	*monitor_full_routine(void *arg);
 void	*monitor_death_routine(void *arg);
