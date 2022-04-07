@@ -23,6 +23,6 @@ void	*error_handling_routine(void *arg)
 	data->flag_finish = TRUE;
 	pthread_mutex_unlock(&(data->mutex_flag_finish));
 	data->is_error_in_thread = TRUE;
-	error_with_msg("Error handling activated in a thread.");
+	error_with_msg("Error handling activated in a philo thread.");
 	return (NULL);
 }

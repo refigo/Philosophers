@@ -25,6 +25,7 @@ void	clear_data(t_setting *data)
 	sem_unlink(data->finish_file);
 	sem_unlink(data->print_mutex_file);
 	sem_unlink(data->full_file);
+	sem_unlink(data->error_file);
 	if (data->philos)
 		free(data->philos);
 	data->philos = NULL;

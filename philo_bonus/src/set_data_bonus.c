@@ -64,7 +64,8 @@ static int	set_forks_philos_and_sems(t_setting *data)
 	if (set_semaphore(&(data->forks), data->forks_file, data->num_of_philos) \
 	|| set_semaphore(&(data->finish_sem), data->finish_file, 0) \
 	|| set_semaphore(&(data->print_mutex_sem), data->print_mutex_file, 1) \
-	|| set_semaphore(&(data->full_sem), data->full_file, 0))
+	|| set_semaphore(&(data->full_sem), data->full_file, 0) \
+	|| set_semaphore(&(data->error_sem), data->error_file, 0))
 		return (FAIL);
 	return (SUCCESS);
 }

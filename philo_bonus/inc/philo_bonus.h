@@ -63,7 +63,8 @@ typedef struct s_setting
 	char			*print_mutex_file;
 	sem_t			*full_sem;
 	char			*full_file;
-	sem_t			error_sem;
+	pthread_t		monitor_error_thread;
+	sem_t			*error_sem;
 	char			*error_file;
 	int				is_error_in_philo;
 }				t_setting;
@@ -80,6 +81,7 @@ void		process_philo(t_philo *philo);
 // monitor_routine_bonus.c
 void		*monitor_full_routine(void *arg);
 void		*monitor_death_routine(void *arg);
+void		*monitor_error_routine(void *arg);
 
 // clear_data_bonus.c
 void	clear_data(t_setting *data);
