@@ -48,7 +48,7 @@ static int	invite_philos(t_setting *data)
 		if (data->philos[i].philo_pid == 0)
 		{
 			process_philo(&(data->philos[i]));
-			exit(TRUE);
+			exit(SUCCESS);
 		}
 		else if (data->philos[i].philo_pid == -1)
 			return (fail_with_closing(data));

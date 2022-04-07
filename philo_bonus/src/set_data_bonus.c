@@ -38,6 +38,7 @@ static int	set_and_check_args(t_setting *data, int argc, char **argv)
 
 static int	set_semaphore(sem_t **sem, const char *file, unsigned int value)
 {
+	sem_unlink(file);
 	*sem = sem_open(file, O_CREAT, 0644, value);
 	if (*sem == SEM_FAILED)
 		return (error_with_msg("sem_open failed"));
@@ -61,6 +62,7 @@ static int	set_forks_philos_and_sems(t_setting *data)
 	data->finish_file = "/sem_termination";
 	data->print_mutex_file = "/sem_print_mutex";
 	data->full_file = "/sem_full";
+	data->error_file = "/sem_error";
 	if (set_semaphore(&(data->forks), data->forks_file, data->num_of_philos) \
 	|| set_semaphore(&(data->finish_sem), data->finish_file, 0) \
 	|| set_semaphore(&(data->print_mutex_sem), data->print_mutex_file, 1) \
