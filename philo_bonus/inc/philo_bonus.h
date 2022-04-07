@@ -57,7 +57,7 @@ typedef struct s_setting
 	long int		ms_start_dining;
 	pthread_t		monitor_full_thread;
 
-	sem_t			*termination_sem;
+	sem_t			*termination_sem;	// finish?
 	sem_t			*print_mutex_sem;
 	sem_t			*full_sem;
 	//sem_t			error_sem;
@@ -79,6 +79,9 @@ void		process_philo(t_philo *philo);
 // monitor_routine_bonus.c
 void		*monitor_full_routine(void *arg);
 void		*monitor_death_routine(void *arg);
+
+// clear_data_bonus.c
+void	clear_data(t_setting *data);
 
 // utils
 int			are_args_only_nums(int argc, char **argv);

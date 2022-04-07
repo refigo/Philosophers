@@ -13,8 +13,10 @@
 #include "philo_bonus.h"
 #include <unistd.h> // fork()
 #include <stdlib.h> // exit()
+#include <signal.h> // kill()
+#include <sys/wait.h> // waitpid()
 
-int	invite_philos(t_setting *data)
+static int	invite_philos(t_setting *data)
 {
 	int	i;
 
@@ -38,6 +40,18 @@ int	invite_philos(t_setting *data)
 	return (SUCCESS);
 }
 
+void	close_when_finished(t_setting *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		kill(data->philos[i].philo_pid, SIGKILL);
+		waitpid(data->philos[i].philo_pid, NULL, 0);
+	}
+}
+
 int	have_dining(t_setting *data)
 {
 	if (data->num_of_philos == 0)
@@ -46,6 +60,6 @@ int	have_dining(t_setting *data)
 		return (SUCCESS);
 	}
 	invite_philos(data);
-	//close_when_finished
+	close_when_finished(data);
 	return (SUCCESS);
 }

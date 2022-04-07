@@ -38,7 +38,6 @@ static int	set_and_check_args(t_setting *data, int argc, char **argv)
 
 static int	set_semaphore(sem_t **sem, const char *file, unsigned int value)
 {
-	//sem_unlink(file); // important!!! but why..?
 	*sem = sem_open(file, O_CREAT, 0644, value);
 	if (*sem == SEM_FAILED)
 		return (FAIL);
@@ -56,7 +55,7 @@ static int	set_forks_philos_and_sems(t_setting *data)
 	while (++i < data->num_of_philos)
 	{
 		data->philos[i].number = i + 1;
-		data->philos[i].data = data; // todo: consider
+		data->philos[i].data = data;
 	}
 	data->forks_file = "/sem_forks";
 	data->termination_file = "/sem_termination";
@@ -66,7 +65,7 @@ static int	set_forks_philos_and_sems(t_setting *data)
 	|| set_semaphore(&(data->termination_sem), data->termination_file, 0) \
 	|| set_semaphore(&(data->print_mutex_sem), data->print_mutex_file, 1) \
 	|| set_semaphore(&(data->full_sem), data->full_file, 0))
-		return (FAIL); // todo: check
+		return (FAIL); // todo: check, with unlink, free
 	return (SUCCESS);
 }
 
@@ -79,42 +78,3 @@ int	set_data(t_setting *data, int argc, char **argv)
 		return (FAIL);	// todo: check
 	return (SUCCESS);
 }
-
-/*
-static int	set_forks_and_philos(t_setting *data)
-{
-	int	i;
-
-	//data->forks = mgo_calloc(data->num_of_philos, sizeof(pthread_mutex_t));
-	data->philos = mgo_calloc(data->num_of_philos, sizeof(t_philo));
-	if ((data->philos == NULL) || (data->forks == NULL))
-		return (error_with_msg("malloc failed"));
-	i = -1;
-	while (++i < data->num_of_philos)
-	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) != SUCCESS)
-			return (error_with_msg("mutex init failed"));
-		data->philos[i].number = i + 1;
-		data->philos[i].l_fork = &(data->forks[i]);
-		data->philos[i].r_fork = &(data->forks[\
-				(i + 1) % (data->num_of_philos)]);
-		
-		if (pthread_mutex_init(&(data->philos[i].mutex_check_starvation), NULL) \
-				!= SUCCESS)
-			return (error_with_msg("mutex init failed"));
-		data->philos[i].data = data;
-	}
-	return (SUCCESS);
-}
-*/
-
-/*
-static int	init_mutex_for_termination(t_setting *data)
-{
-	if (pthread_mutex_init(&(data->mutex_flag_finish), NULL) != SUCCESS)
-		return (error_with_msg("mutex init failed"));
-	if (pthread_mutex_init(&(data->mutex_error_handling), NULL) != SUCCESS)
-		return (error_with_msg("mutex init failed"));
-	return (SUCCESS);
-}
-*/
