@@ -55,6 +55,7 @@ void	process_philo(t_philo *philo)
 {
 	pthread_create(&(philo->monitor_death_thread), NULL, \
 	monitor_death_routine, philo);
+	//detach
 	//if (philo->number % 2 == 0)
 	while (TRUE)
 	{

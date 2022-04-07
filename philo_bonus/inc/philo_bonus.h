@@ -82,6 +82,7 @@ void		*monitor_death_routine(void *arg);
 
 // clear_data_bonus.c
 void	clear_data(t_setting *data);
+int		fail_with_clearing_data(t_setting *data);
 
 // utils
 int			are_args_only_nums(int argc, char **argv);
