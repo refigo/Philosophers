@@ -34,11 +34,13 @@ void	*monitor_full_routine(void *arg)
 	count_full = 0;
 	while (TRUE)
 	{
-		sem_wait(data->full_sem); // todo: error
+		if (sem_wait(data->full_sem) == FAIL)
+			sem_post(data->error_sem);
 		count_full++;
 		if (count_full == data->num_of_philos)
 		{
-			sem_wait(data->print_mutex_sem);
+			if (sem_wait(data->print_mutex_sem) == FAIL)
+				sem_post(data->error_sem);
 			printf("Finish: full\n");
 			sem_post(data->finish_sem);
 			break ;
@@ -57,7 +59,8 @@ void	*monitor_death_routine(void *arg)
 	sleep_shortly_ms(philo->data->time_to_die - 10);
 	while (TRUE)
 	{
-		sem_wait(philo->data->print_mutex_sem);
+		if (sem_wait(philo->data->print_mutex_sem) == FAIL)
+			sem_post(philo->data->error_sem);
 		set_time_ms(&ms_now);
 		diff_time_eating = ms_now - philo->ms_eat_last;
 		if (diff_time_eating >= philo->data->time_to_die)
