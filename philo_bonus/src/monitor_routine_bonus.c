@@ -27,7 +27,7 @@ void	*monitor_full_routine(void *arg)
 		{
 			sem_wait(data->print_mutex_sem);
 			printf("Finish: full\n");
-			sem_post(data->termination_sem);
+			sem_post(data->finish_sem);
 			break ;
 		}
 	}
@@ -50,7 +50,7 @@ void	*monitor_death_routine(void *arg)
 		if (diff_time_eating >= philo->data->time_to_die)
 		{
 			print_philo_died(philo, ms_now);
-			sem_post(philo->data->termination_sem);
+			sem_post(philo->data->finish_sem);
 			break ;
 		}
 		sem_post(philo->data->print_mutex_sem);

@@ -57,14 +57,15 @@ typedef struct s_setting
 	long int		ms_start_dining;
 	pthread_t		monitor_full_thread;
 
-	sem_t			*termination_sem;	// finish?
+	sem_t			*finish_sem;
+	char			*finish_file;
 	sem_t			*print_mutex_sem;
-	sem_t			*full_sem;
-	//sem_t			error_sem;
-	char			*termination_file;
 	char			*print_mutex_file;
+	sem_t			*full_sem;
 	char			*full_file;
-	//char			*error_file;
+	sem_t			error_sem;
+	char			*error_file;
+	int				is_error_in_philo;
 }				t_setting;
 
 // set_data_bonus.c

@@ -21,8 +21,8 @@ static int	invite_philos(t_setting *data)
 	int	i;
 
 	pthread_create(&(data->monitor_full_thread), NULL, \
-	monitor_full_routine, data);
-	//detach
+		monitor_full_routine, data);
+	pthread_detach(data->monitor_full_thread);
 	set_time_ms(&(data->ms_start_dining));
 	i = -1;
 	while (++i < data->num_of_philos)
@@ -37,11 +37,11 @@ static int	invite_philos(t_setting *data)
 		else if (data->philos[i].philo_pid == -1)
 			return (FAIL);
 	}
-	sem_wait(data->termination_sem); // todo: error check
+	sem_wait(data->finish_sem); // todo: error check
 	return (SUCCESS);
 }
 
-void	close_when_finished(t_setting *data)
+static void	close_when_finished(t_setting *data)
 {
 	int	i;
 

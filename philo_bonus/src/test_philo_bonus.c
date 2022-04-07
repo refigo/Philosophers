@@ -24,7 +24,7 @@ void	test_data(t_setting *data)
 
 	printf("data->philos: [%p]\n", data->philos);
 	printf("data->forks: [%p]\n", data->forks);
-	printf("data->termination_sem: [%p]\n", data->termination_sem);
+	printf("data->termination_sem: [%p]\n", data->finish_sem);
 	printf("data->print_mutex_sem: [%p]\n", data->print_mutex_sem);
 	printf("data->full_sem: [%p]\n", data->full_sem);
 
