@@ -13,12 +13,6 @@
 #include "philo_bonus.h"
 #include <stdlib.h>
 
-int	fail_with_clearing_data(t_setting *data)
-{
-	clear_data(data);
-	return (FAIL);
-}
-
 void	clear_data(t_setting *data)
 {
 	sem_unlink(data->forks_file);

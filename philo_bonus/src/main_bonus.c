@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 Usage: ./philos_bonus number_of_philos time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosophers_must_eat]"));
 	if (set_data(&data, argc, argv) == FAIL)
-		return (FAIL); // todo: with clear?
+		return (FAIL);
 	if (have_dining(&data) == FAIL)
 		return (fail_with_clearing_data(&data));
 	clear_data(&data);

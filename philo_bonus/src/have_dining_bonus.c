@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <unistd.h> // fork()
-#include <stdlib.h> // exit()
-#include <signal.h> // kill()
-#include <sys/wait.h> // waitpid()
+#include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/wait.h>
 
 static void	close_when_finished(t_setting *data)
 {
@@ -26,29 +26,6 @@ static void	close_when_finished(t_setting *data)
 		kill(data->philos[i].philo_pid, SIGKILL);
 		waitpid(data->philos[i].philo_pid, NULL, 0);
 	}
-}
-
-static int	fail_with_closing(t_setting *data)
-{
-	int	i;
-
-	i = 0;
-	while ((data->philos[i].philo_pid != 0) \
-		&& (data->philos[i].philo_pid != -1) \
-		&& (i < data->num_of_philos))
-	{
-		kill(data->philos[i].philo_pid, SIGKILL);
-		waitpid(data->philos[i].philo_pid, NULL, 0);
-		i++;
-	}
-	return (FAIL);
-}
-
-static int	fail_with_detaching_previous(t_setting *data)
-{
-	if (data->monitor_full_thread)
-		pthread_detach(data->monitor_full_thread);
-	return (FAIL);
 }
 
 static int	invite_philos(t_setting *data)
@@ -76,7 +53,8 @@ static int	invite_philos(t_setting *data)
 		else if (data->philos[i].philo_pid == -1)
 			return (fail_with_closing(data));
 	}
-	sem_wait(data->finish_sem); // todo: error check
+	if (sem_wait(data->finish_sem) == FAIL)
+		return (FAIL);
 	if (data->is_error_in_philo == TRUE)
 		return (FAIL);
 	return (SUCCESS);
