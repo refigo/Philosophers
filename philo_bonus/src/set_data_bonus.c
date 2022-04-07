@@ -38,7 +38,7 @@ static int	set_and_check_args(t_setting *data, int argc, char **argv)
 
 static int	set_semaphore(sem_t **sem, const char *file, unsigned int value)
 {
-	sem_unlink(file); // important!!! but why..?
+	//sem_unlink(file); // important!!! but why..?
 	*sem = sem_open(file, O_CREAT, 0644, value);
 	if (*sem == SEM_FAILED)
 		return (FAIL);

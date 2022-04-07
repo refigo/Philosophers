@@ -18,7 +18,8 @@ int	invite_philos(t_setting *data)
 {
 	int	i;
 
-	pthread_create(&(data->monitor_full_thread), NULL, monitor_full_routine, data);
+	pthread_create(&(data->monitor_full_thread), NULL, \
+	monitor_full_routine, data);
 	set_time_ms(&(data->ms_start_dining));
 	i = -1;
 	while (++i < data->num_of_philos)

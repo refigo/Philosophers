@@ -67,33 +67,32 @@ typedef struct s_setting
 	//char			*error_file;
 }				t_setting;
 
-
 // set_data_bonus.c
-int	set_data(t_setting *data, int argc, char **argv);
+int			set_data(t_setting *data, int argc, char **argv);
 
 // have_dining_bonus.c
-int	have_dining(t_setting *data);
+int			have_dining(t_setting *data);
 
 // process_philo_bonus.c
-void	process_philo(t_philo *philo);
+void		process_philo(t_philo *philo);
 
 // monitor_routine_bonus.c
-void	*monitor_full_routine(void *arg);
-void	*monitor_death_routine(void *arg);
+void		*monitor_full_routine(void *arg);
+void		*monitor_death_routine(void *arg);
 
 // utils
-int	are_args_only_nums(int argc, char **argv);
-int	mgo_atoi(const char *str);
-void	*mgo_calloc(size_t count, size_t size);
-void	mgo_putstr_fd(char *s, int fd);
-size_t	mgo_strlen(const char *s);
-int	error_with_msg(char *msg);
+int			are_args_only_nums(int argc, char **argv);
+int			mgo_atoi(const char *str);
+void		*mgo_calloc(size_t count, size_t size);
+void		mgo_putstr_fd(char *s, int fd);
+size_t		mgo_strlen(const char *s);
+int			error_with_msg(char *msg);
 long int	set_time_ms(long int *dest);
-int	sleep_shortly_ms(long int ms_sleep);
-int	print_philo_died(t_philo *philo, long int ms_now);
-int	print_philo_status(t_philo *philo, char *status);
+int			sleep_shortly_ms(long int ms_sleep);
+int			print_philo_died(t_philo *philo, long int ms_now);
+int			print_philo_status(t_philo *philo, char *status);
 
 // test
-void	test_data(t_setting *data);
+void		test_data(t_setting *data);
 
 #endif

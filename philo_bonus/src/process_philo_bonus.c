@@ -53,7 +53,8 @@ void	thinking(t_philo *philo)
 
 void	process_philo(t_philo *philo)
 {
-	pthread_create(&(philo->monitor_death_thread), NULL, monitor_death_routine, philo);
+	pthread_create(&(philo->monitor_death_thread), NULL, \
+	monitor_death_routine, philo);
 	//if (philo->number % 2 == 0)
 	while (TRUE)
 	{
