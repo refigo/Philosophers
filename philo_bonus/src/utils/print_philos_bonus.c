@@ -29,8 +29,9 @@ int	print_philo_status(t_philo *philo, char *status)
 	int			ret;
 
 	ret = SUCCESS;
-	sem_wait(philo->data->print_mutex_sem);
 	set_time_ms(&timestamp_ms);
+	if (sem_wait(philo->data->print_mutex_sem) == FAIL)
+		sem_post(philo->data->error_sem);
 	timestamp_ms -= philo->data->ms_start_dining;
 	if (printf("%ld %d %s\n", timestamp_ms, philo->number, status) < 0)
 		ret = FAIL;

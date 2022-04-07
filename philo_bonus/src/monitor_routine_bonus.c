@@ -59,17 +59,19 @@ void	*monitor_death_routine(void *arg)
 	sleep_shortly_ms(philo->data->time_to_die - 10);
 	while (TRUE)
 	{
-		if (sem_wait(philo->data->print_mutex_sem) == FAIL)
-			sem_post(philo->data->error_sem);
 		set_time_ms(&ms_now);
 		diff_time_eating = ms_now - philo->ms_eat_last;
 		if (diff_time_eating >= philo->data->time_to_die)
 		{
+			
+			if (sem_wait(philo->data->print_mutex_sem) == FAIL)
+				sem_post(philo->data->error_sem);
 			print_philo_died(philo, ms_now);
 			sem_post(philo->data->finish_sem);
 			break ;
+			sem_post(philo->data->print_mutex_sem);
 		}
-		sem_post(philo->data->print_mutex_sem);
+		
 	}
 	return (NULL);
 }
