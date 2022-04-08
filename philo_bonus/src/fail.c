@@ -29,8 +29,10 @@ int	fail_with_closing(t_setting *data)
 		&& (data->philos[i].philo_pid != -1) \
 		&& (i < data->num_of_philos))
 	{
-		kill(data->philos[i].philo_pid, SIGKILL);
-		waitpid(data->philos[i].philo_pid, NULL, 0);
+		if (kill(data->philos[i].philo_pid, SIGKILL) == FAIL)
+			error_with_msg("kill failed");
+		if (waitpid(data->philos[i].philo_pid, NULL, 0) == FAIL)
+			error_with_msg("waitpid failed");
 		i++;
 	}
 	return (FAIL);
@@ -39,6 +41,7 @@ int	fail_with_closing(t_setting *data)
 int	fail_with_detaching_previous(t_setting *data)
 {
 	if (data->monitor_full_thread)
-		pthread_detach(data->monitor_full_thread);
+		if (pthread_detach(data->monitor_full_thread) != SUCCESS)
+			error_with_msg("pthread_detach failed");
 	return (FAIL);
 }
