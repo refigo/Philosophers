@@ -13,17 +13,27 @@
 #include "philo.h"
 #include <stdio.h>
 
-static void	close_when_finished(t_setting *data)
+static int	close_when_finished(t_setting *data)
 {
+	int		ret;
 	int		i;
 
+	ret = SUCCESS;
 	i = -1;
 	while (++i < data->num_of_philos)
-		pthread_join(data->philos[i].philo_thread, NULL);
-	pthread_join(data->monitor_death_thread, NULL);
-	pthread_join(data->monitor_full_thread, NULL);
-	pthread_mutex_unlock(&(data->mutex_error_handling));
-	pthread_join(data->error_handling_thread, NULL);
+	{
+		if (pthread_join(data->philos[i].philo_thread, NULL) != SUCCESS)
+			ret = error_with_msg("pthread_join failed");
+	}
+	if (pthread_join(data->monitor_death_thread, NULL) != SUCCESS)
+		ret = error_with_msg("pthread_join failed");
+	if (pthread_join(data->monitor_full_thread, NULL) != SUCCESS)
+		ret = error_with_msg("pthread_join failed");
+	if (pthread_mutex_unlock(&(data->mutex_error_handling)) != SUCCESS)
+		ret = error_with_msg("pthread_mutex_unlock failed");
+	if (pthread_join(data->error_handling_thread, NULL) != SUCCESS)
+		ret = error_with_msg("pthread_join failed");
+	return (ret);
 }
 
 static int	error_with_joining_previous(t_setting *data, int last_index)
@@ -48,7 +58,8 @@ static int	invite_philos(t_setting *data)
 	int	i;
 
 	pthread_mutex_lock(&(data->mutex_error_handling));
-	set_time_ms(&(data->ms_start_dining));
+	if (set_time_ms(&(data->ms_start_dining)) == FAIL)
+		pthread_mutex_unlock(&(data->mutex_error_handling));
 	i = -1;
 	while (++i < data->num_of_philos)
 	{
@@ -76,7 +87,8 @@ int	have_dining(t_setting *data)
 	}
 	if (invite_philos(data) == FAIL)
 		return (FAIL);
-	close_when_finished(data);
+	if (close_when_finished(data) == FAIL)
+		return (FAIL);
 	if (data->is_error_in_thread == TRUE)
 		return (FAIL);
 	return (SUCCESS);

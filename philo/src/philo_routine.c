@@ -37,7 +37,7 @@ static void	eating(t_philo *philo)
 	if (pthread_mutex_lock(&philo->mutex_check_starvation) != SUCCESS \
 		|| print_philo_status(philo, "is eating") == FAIL \
 		|| set_time_ms(&(philo->ms_eat_last)) == FAIL \
-		|| pthread_mutex_unlock(&philo->mutex_check_starvation))
+		|| pthread_mutex_unlock(&philo->mutex_check_starvation) != SUCCESS)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	if (philo->num_eat < philo->data->num_of_times_each_must_eat)
 	{
