@@ -48,8 +48,10 @@ typedef struct s_setting
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_of_times_each_must_eat;
+
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
+
 	long int		ms_start_dining;
 	int				flag_finish;
 	pthread_mutex_t	mutex_flag_finish;

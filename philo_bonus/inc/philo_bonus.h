@@ -51,9 +51,9 @@ typedef struct s_setting
 	t_philo			*philos;
 	sem_t			*forks;
 	char			*forks_file;
+
 	long int		ms_start_dining;
 	pthread_t		monitor_full_thread;
-
 	sem_t			*finish_sem;
 	char			*finish_file;
 	sem_t			*print_mutex_sem;
