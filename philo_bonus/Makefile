@@ -39,7 +39,7 @@ SRC_LIST	=	main_bonus.c \
 				process_philo_bonus.c \
 				monitor_routine_bonus.c \
 				clear_data_bonus.c \
-				fail.c \
+				fail_functions_bonus.c \
 				$(DIR_UTIL)are_args_only_nums_bonus.c \
 				$(DIR_UTIL)mgo_atoi_bonus.c \
 				$(DIR_UTIL)mgo_calloc_bonus.c \
