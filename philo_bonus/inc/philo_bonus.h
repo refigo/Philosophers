@@ -17,7 +17,7 @@
 # include <semaphore.h>
 
 // to remove
-# include <stdio.h>
+//# include <stdio.h>
 
 # define EPSILON 300
 

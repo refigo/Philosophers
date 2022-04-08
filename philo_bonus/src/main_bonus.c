@@ -25,8 +25,5 @@ Usage: ./philos_bonus number_of_philos time_to_die time_to_eat time_to_sleep \
 	if (have_dining(&data) == FAIL)
 		return (fail_with_clearing_data(&data));
 	clear_data(&data);
-
-	//test_data(&data);
-	//system("leaks philo_bonus");
 	return (SUCCESS);
 }

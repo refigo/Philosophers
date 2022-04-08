@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/03/30 16:02:30 by mgo              ###   ########.fr        #
+#    Updated: 2022/04/08 09:38:24 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,7 @@ SRC_LIST	=	main_bonus.c \
 				$(DIR_UTIL)error_with_msg_bonus.c \
 				$(DIR_UTIL)set_time_ms_bonus.c \
 				$(DIR_UTIL)sleep_shortly_ms_bonus.c \
-				$(DIR_UTIL)print_philos_bonus.c \
-				test_philo_bonus.c # to remove
+				$(DIR_UTIL)print_philos_bonus.c
 SRC			=	$(addprefix $(SRC_PATH), $(SRC_LIST))
 
 OBJ_LIST	=	$(SRC_LIST:.c=.o)
