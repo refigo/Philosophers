@@ -6,7 +6,7 @@
 #    By: mgo <mgo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 17:02:05 by mgo               #+#    #+#              #
-#    Updated: 2022/04/08 09:20:30 by mgo              ###   ########.fr        #
+#    Updated: 2022/04/08 10:04:52 by mgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME		=	philo
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-CFLAGS		+=	-fsanitize=address -g
+#CFLAGS		+=	-fsanitize=address -g
 RM			=	rm -rf
 
 INC_PATH	=	./inc/ 

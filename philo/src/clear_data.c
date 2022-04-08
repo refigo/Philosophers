@@ -13,8 +13,11 @@
 #include "philo.h"
 #include <stdlib.h>
 
+#include <stdio.h>
+
 int	fail_with_clearing_data(t_setting *data)
 {
+	printf("in fail_with_clearing_data\n");
 	clear_data(data);
 	return (FAIL);
 }
@@ -48,6 +51,5 @@ void	clear_data(t_setting *data)
 	if (data->philos)
 		clear_data_philos(data);
 	pthread_mutex_destroy(&(data->mutex_flag_finish));
-	pthread_mutex_unlock(&(data->mutex_error_handling));
 	pthread_mutex_destroy(&(data->mutex_error_handling));
 }

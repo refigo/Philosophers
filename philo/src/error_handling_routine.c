@@ -19,6 +19,8 @@ void	*error_handling_routine(void *arg)
 
 	data = arg;
 	pthread_mutex_lock(&(data->mutex_error_handling));
+	if (data->flag_finish == TRUE)
+		return (NULL);
 	pthread_mutex_lock(&(data->mutex_flag_finish));
 	data->flag_finish = TRUE;
 	pthread_mutex_unlock(&(data->mutex_flag_finish));

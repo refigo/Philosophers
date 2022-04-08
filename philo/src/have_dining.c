@@ -22,6 +22,8 @@ static void	close_when_finished(t_setting *data)
 		pthread_join(data->philos[i].philo_thread, NULL);
 	pthread_join(data->monitor_death_thread, NULL);
 	pthread_join(data->monitor_full_thread, NULL);
+	pthread_mutex_unlock(&(data->mutex_error_handling));
+	pthread_join(data->error_handling_thread, NULL);
 }
 
 static int	error_with_joining_previous(t_setting *data, int last_index)
@@ -62,7 +64,6 @@ static int	invite_philos(t_setting *data)
 		|| pthread_create(&(data->error_handling_thread), NULL, \
 				error_handling_routine, data) != SUCCESS)
 		return (error_with_joining_previous(data, i));
-	pthread_detach(data->error_handling_thread);
 	return (SUCCESS);
 }
 
