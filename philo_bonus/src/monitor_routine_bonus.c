@@ -12,6 +12,7 @@
 
 #include "philo_bonus.h"
 #include <stdio.h>
+#include <unistd.h>
 
 void	*monitor_error_routine(void *arg)
 {
@@ -76,6 +77,7 @@ void	*monitor_death_routine(void *arg)
 			sem_post(philo->data->finish_sem);
 			break ;
 		}
+		usleep(80); // holly...
 	}
 	return (NULL);
 }
