@@ -32,7 +32,8 @@ int	print_philo_status(t_philo *philo, char *status)
 	pthread_mutex_lock(&philo->data->mutex_flag_finish);
 	if (philo->data->flag_finish == FALSE)
 	{
-		set_time_ms(&timestamp_ms);
+		if (set_time_ms(&timestamp_ms) == FAIL)
+			ret = FAIL;
 		timestamp_ms -= philo->data->ms_start_dining;
 		if (printf("%ld %d %s\n", timestamp_ms, philo->number, status) < 0)
 			ret = FAIL;
