@@ -13,43 +13,58 @@
 #include "philo.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-
 int	fail_with_clearing_data(t_setting *data)
 {
-	printf("in fail_with_clearing_data\n");
 	clear_data(data);
 	return (FAIL);
 }
 
-static void	clear_data_forks(t_setting *data)
+static int	clear_data_forks(t_setting *data)
 {
+	int	ret;
 	int	i;
 
+	ret = SUCCESS;
 	i = -1;
 	while (++i < data->num_of_philos)
-		pthread_mutex_destroy(&(data->forks[i]));
+		if (pthread_mutex_destroy(&(data->forks[i])) != SUCCESS)
+			ret = error_with_msg("pthread_mutex_destroy failed in clear forks");
 	free(data->forks);
 	data->forks = NULL;
+	return (ret);
 }
 
-static void	clear_data_philos(t_setting *data)
+static int	clear_data_philos(t_setting *data)
 {
+	int	ret;
 	int	i;
 
+	ret = SUCCESS;
 	i = -1;
 	while (++i < data->num_of_philos)
-		pthread_mutex_destroy(&(data->philos[i].mutex_check_starvation));
+		if (pthread_mutex_destroy(&(data->philos[i].mutex_check_starvation)) \
+			!= SUCCESS)
+			ret = error_with_msg(\
+				"pthread_mutex_destroy failed in clear philos");
 	free(data->philos);
 	data->philos = NULL;
+	return (ret);
 }
 
-void	clear_data(t_setting *data)
+int	clear_data(t_setting *data)
 {
+	int	ret;
+
+	ret = SUCCESS;
 	if (data->forks)
-		clear_data_forks(data);
+		ret = clear_data_forks(data);
 	if (data->philos)
-		clear_data_philos(data);
-	pthread_mutex_destroy(&(data->mutex_flag_finish));
-	pthread_mutex_destroy(&(data->mutex_error_handling));
+		ret = clear_data_philos(data);
+	if (pthread_mutex_destroy(&(data->mutex_flag_finish)) != SUCCESS)
+		ret = error_with_msg("pthread_mutex_destroy failed");
+	if (pthread_mutex_unlock(&(data->mutex_error_handling)) != SUCCESS)
+		ret = error_with_msg("pthread_mutex_unlock failed");
+	if (pthread_mutex_destroy(&(data->mutex_error_handling)) != SUCCESS)
+		ret = error_with_msg("pthread_mutex_destroy failed");
+	return (ret);
 }

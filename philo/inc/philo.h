@@ -78,7 +78,7 @@ void		*monitor_full_routine(void *arg);
 void		*error_handling_routine(void *arg);
 
 // clear_data.c
-void		clear_data(t_setting *data);
+int			clear_data(t_setting *data);
 int			fail_with_clearing_data(t_setting *data);
 
 // utils

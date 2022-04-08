@@ -46,7 +46,7 @@ static void	eating(t_philo *philo)
 			(philo->data->num_philos_full) += 1;
 	}
 	if (sleep_shortly_ms(philo->data->time_to_eat) == FAIL \
-		|| pthread_mutex_unlock(philo->l_fork) != SUCCESS\
+		|| pthread_mutex_unlock(philo->l_fork) != SUCCESS \
 		|| pthread_mutex_unlock(philo->r_fork) != SUCCESS)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }

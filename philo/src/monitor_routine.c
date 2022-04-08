@@ -67,13 +67,15 @@ void	*monitor_death_routine(void *arg)
 		i = -1;
 		while (++i < data->num_of_philos && data->flag_finish == FALSE)
 		{
-			if (pthread_mutex_lock(&(data->philos[i].mutex_check_starvation)) != SUCCESS \
+			if (pthread_mutex_lock(&(data->philos[i].mutex_check_starvation)) \
+				!= SUCCESS \
 				|| pthread_mutex_lock(&(data->mutex_flag_finish)) != SUCCESS)
 				pthread_mutex_unlock(&(data->mutex_error_handling));
 			if (data->flag_finish == FALSE)
 				check_death_to_finish(&(data->philos[i]));
 			if (pthread_mutex_unlock(&(data->mutex_flag_finish)) != SUCCESS \
-				|| pthread_mutex_unlock(&(data->philos[i].mutex_check_starvation)) != SUCCESS)
+			|| pthread_mutex_unlock(&(data->philos[i].mutex_check_starvation)) \
+				!= SUCCESS)
 				pthread_mutex_unlock(&(data->mutex_error_handling));
 		}
 	}
