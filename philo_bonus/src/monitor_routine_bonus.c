@@ -77,7 +77,7 @@ void	*monitor_death_routine(void *arg)
 			sem_post(philo->data->finish_sem);
 			break ;
 		}
-		usleep(80); // holly...
+		usleep(80);
 	}
 	return (NULL);
 }

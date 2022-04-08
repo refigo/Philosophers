@@ -35,10 +35,6 @@ typedef struct s_philo
 	int					number;
 	pid_t				philo_pid;
 	pthread_t			monitor_death_thread;
-	/*
-	sem_t				*starvation_sem;
-	char				*starvation_file;
-	*/
 	long int			ms_eat_last;
 	int					num_eat;
 	struct s_setting	*data;
