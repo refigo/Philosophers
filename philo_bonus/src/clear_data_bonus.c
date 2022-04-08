@@ -13,14 +13,23 @@
 #include "philo_bonus.h"
 #include <stdlib.h>
 
-void	clear_data(t_setting *data)
+int	clear_data(t_setting *data)
 {
-	sem_unlink(data->forks_file);
-	sem_unlink(data->finish_file);
-	sem_unlink(data->print_mutex_file);
-	sem_unlink(data->full_file);
-	sem_unlink(data->error_file);
+	int	ret;
+
+	ret = SUCCESS;
+	if (sem_unlink(data->forks_file) == FAIL)
+		ret = error_with_msg("sem_unlink failed");
+	if (sem_unlink(data->finish_file) == FAIL)
+		ret = error_with_msg("sem_unlink failed");
+	if (sem_unlink(data->print_mutex_file) == FAIL)
+		ret = error_with_msg("sem_unlink failed");
+	if (sem_unlink(data->full_file) == FAIL)
+		ret = error_with_msg("sem_unlink failed");
+	if (sem_unlink(data->error_file) == FAIL)
+		ret = error_with_msg("sem_unlink failed");
 	if (data->philos)
 		free(data->philos);
 	data->philos = NULL;
+	return (ret);
 }
