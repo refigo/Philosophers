@@ -50,6 +50,7 @@ void	*monitor_full_routine(void *arg)
 			sem_post(data->finish_sem);
 			break ;
 		}
+		usleep(80);
 	}
 	return (NULL);
 }
