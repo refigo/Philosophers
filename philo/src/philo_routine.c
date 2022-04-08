@@ -18,8 +18,8 @@ static void	taking_forks(t_philo *philo)
 	t_setting	*data;
 
 	data = philo->data;
-	pthread_mutex_lock(philo->l_fork);
-	if (print_philo_status(philo, "has taken a fork") == FAIL)
+	if (pthread_mutex_lock(philo->l_fork) != SUCCESS \
+		|| print_philo_status(philo, "has taken a fork") == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 	if (data->num_of_philos == 1)
 	{
@@ -27,43 +27,41 @@ static void	taking_forks(t_philo *philo)
 			;
 		return ;
 	}
-	pthread_mutex_lock(philo->r_fork);
-	if (print_philo_status(philo, "has taken a fork") == FAIL)
+	if (pthread_mutex_lock(philo->r_fork) != SUCCESS \
+		|| print_philo_status(philo, "has taken a fork") == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
 
 static void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mutex_check_starvation);
-	if (print_philo_status(philo, "is eating") == FAIL)
+	if (pthread_mutex_lock(&philo->mutex_check_starvation) != SUCCESS \
+		|| print_philo_status(philo, "is eating") == FAIL \
+		|| set_time_ms(&(philo->ms_eat_last)) == FAIL \
+		|| pthread_mutex_unlock(&philo->mutex_check_starvation))
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
-	set_time_ms(&(philo->ms_eat_last));
-	pthread_mutex_unlock(&philo->mutex_check_starvation);
 	if (philo->num_eat < philo->data->num_of_times_each_must_eat)
 	{
 		(philo->num_eat)++;
 		if (philo->num_eat == philo->data->num_of_times_each_must_eat)
 			(philo->data->num_philos_full) += 1;
 	}
-	if (sleep_shortly_ms(philo->data->time_to_eat) == FAIL)
+	if (sleep_shortly_ms(philo->data->time_to_eat) == FAIL \
+		|| pthread_mutex_unlock(philo->l_fork) != SUCCESS\
+		|| pthread_mutex_unlock(philo->r_fork) != SUCCESS)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
 }
 
 static void	sleeping(t_philo *philo)
 {
-	if (print_philo_status(philo, "is sleeping") == FAIL)
-		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
-	if (sleep_shortly_ms(philo->data->time_to_sleep) == FAIL)
+	if (print_philo_status(philo, "is sleeping") == FAIL \
+		|| sleep_shortly_ms(philo->data->time_to_sleep) == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
 
 static void	thinking(t_philo *philo)
 {
-	if (print_philo_status(philo, "is thinking") == FAIL)
-		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
-	if (usleep(300) == FAIL)
+	if (print_philo_status(philo, "is thinking") == FAIL \
+		|| usleep(300) == FAIL)
 		pthread_mutex_unlock(&(philo->data->mutex_error_handling));
 }
 

@@ -12,14 +12,15 @@
 
 #include <sys/time.h>
 
-long int	set_time_ms(long int *dest)
+int	set_time_ms(long int *dest)
 {
 	long int		ret;
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
+	if (gettimeofday(&tv, NULL) == -1)
+		return (-1);
 	ret = (tv.tv_sec * 1000);
 	ret += (tv.tv_usec / 1000);
 	*dest = ret;
-	return (ret);
+	return (0);
 }
